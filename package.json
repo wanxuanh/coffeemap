@@ -5,6 +5,9 @@
   "main": "index.js",
   "scripts": {
     "dev": "nodemon server.js",
+    "frontend:install":"cd coffeemap-frontend npm install",
+    "frontend:build":"cd coffeemap-frontend && npm run build",
+    "heroku-postbuild": "npm run frontend:install && npm run frontend:build",
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon server.js"
   },
