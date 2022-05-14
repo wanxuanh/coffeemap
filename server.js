@@ -63,6 +63,6 @@ app.post('/posts', verifyToken, (req, res) => {
 //     res.clearCookie("NewCookie").send("cookie dead")
 // })
 
-app.listen(3000, () => {
-	console.log('listening at port 3000');
+app.listen(PORT, () => {
+	console.log('listening at port '+ PORT);
 });
