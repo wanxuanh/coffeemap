@@ -8,6 +8,7 @@ const transactions = require('./transaction');
 const PORT = process.env.PORT
 
 app.use(express.json());
+app.use(express.static("./coffeemap-frontend/build"))
 
 app.get('/', (req, res) => {
 	res.send('working');
