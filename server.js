@@ -5,6 +5,8 @@ const app = express();
 const jwt = require('jsonwebtoken');
 const users = require('./users');
 const transactions = require('./transaction');
+const PORT = process.env.PORT
+
 app.use(express.json());
 
 app.get('/', (req, res) => {
