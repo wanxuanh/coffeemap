@@ -3,23 +3,18 @@ const { PrismaClient } = require('@prisma/client')
 const prisma = new PrismaClient()
 
 async function main() {
-  await prisma.user.create({
+  await prisma.users.create({
     data: {
-      name: 'Alice',
-      email: 'alice@prisma.io',
-      posts: {
-        create: { title: 'Hello World' },
-      },
-      profile: {
-        create: { bio: 'I like turtles' },
-      },
+      username: 'wanxuan.ho@gmail.com',
+      password: '1234',
+      name: 'wxuanh',
+      reviews: 'good'
     },
   })
 
-  const allUsers = await prisma.user.findMany({
+  const allUsers = await prisma.users.findMany({
     include: {
-      posts: true,
-      profile: true,
+      username: 'wanxuan.ho@gmail.com',
     },
   })
   console.dir(allUsers, { depth: null })
