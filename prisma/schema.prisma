@@ -1,0 +1,35 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model cafes {
+  cafeid   Int       @id @default(autoincrement())
+  cafename String    @db.VarChar(255)
+  address  String?   @db.VarChar(255)
+  offday   String?   @db.VarChar(255)
+  imageurl String?   @db.VarChar(255)
+  reviews  reviews[]
+}
+
+model reviews {
+  reviewid Int     @id @default(autoincrement())
+  comments String? @db.VarChar(255)
+  imageurl String? @db.VarChar(255)
+  cafeid   Int?
+  userid   Int?
+  cafes    cafes?  @relation(fields: [cafeid], references: [cafeid], onDelete: NoAction, onUpdate: NoAction)
+  users    users?  @relation(fields: [userid], references: [userid], onDelete: NoAction, onUpdate: NoAction)
+}
+
+model users {
+  userid   Int       @id @default(autoincrement())
+  username String?   @db.VarChar(255)
+  password String?   @db.VarChar(255)
+  name     String?   @db.VarChar(255)
+  reviews  reviews[]
+}

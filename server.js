@@ -1,12 +1,20 @@
 require('dotenv').config();
 
+// import { PrismaClient } from '@prisma/client'
+// const prisma = new PrismaClient()
+
 const express = require('express');
 const app = express();
+const PORT = process.env.PORT;
 const jwt = require('jsonwebtoken');
+
 const users = require('./users');
 const transactions = require('./transaction');
-const PORT = process.env.PORT;
 const path = require('path');
+const cors = require("cors")
+
+//MIDDLEWARE
+app.use(cors())
 
 app.use(express.json());
 app.use(express.static('./coffeemap-frontend/build'));
@@ -53,6 +61,7 @@ app.post('/api/login', (req, res) => {
 		res.status(403).send('unauthorised');
 	}
 });
+
 
 app.post('/api/posts', verifyToken, (req, res) => {
 	const username = req.user;
