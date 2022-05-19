@@ -1,20 +1,20 @@
 require('dotenv').config();
 
-// import { PrismaClient } from '@prisma/client'
-// const prisma = new PrismaClient()
-
 const express = require('express');
+const { PrismaClient } = require('@prisma/client');
 const app = express();
 const PORT = process.env.PORT;
 const jwt = require('jsonwebtoken');
+const bcrypt = require('bcrypt');
 
 const users = require('./users');
 const transactions = require('./transaction');
 const path = require('path');
-const cors = require("cors")
+const cors = require('cors');
+const prisma = new PrismaClient();
 
 //MIDDLEWARE
-app.use(cors())
+app.use(cors());
 
 app.use(express.json());
 app.use(express.static('./coffeemap-frontend/build'));
@@ -41,27 +41,64 @@ const verifyToken = (req, res, next) => {
 	}
 };
 
-app.post('/api/login', (req, res) => {
-	const { username, password } = req.body;
+app.post('/api/signup', async (req, res) => {
+	const data = req.body;
+	const { username, password, name } = data;
+	const salt = await bcrypt.genSalt(10);
 
-	if (users[username].password === password) {
-		//authenticate and create the jwt
-
-		const newToken = jwt.sign(
-			{
-				data: username
-			},
-			process.env.TOKEN_SECRET,
-			{ expiresIn: 60 * 60 }
-		);
-
-		res.status(200).json({ token: newToken });
-		//    res.status(200).cookie("NewCookie", newToken, { path: "/" }).send("cookie");
-	} else {
-		res.status(403).send('unauthorised');
+	if (!(data.username && data.password)) {
+		return res.status(400).send({ error: error.message });
+	}
+	try {
+		data.password = await bcrypt.hash(data.password, salt);
+		await prisma.users.create({ data });
+		res.status(200).json(data);
+	} catch (error) {
+		res.status(400).json({ error: error.message });
 	}
 });
 
+app.post('/api/login', async (req, res) => {
+	const data = req.body;
+	const { username, password } = data;
+
+	const user = await prisma.users.findUnique({
+		where: {
+			username
+		}
+	});
+
+	if (!user) {
+		res.send('invalid user');
+	}
+
+	const validatePassword = bcrypt.compareSync(password, user.password);
+	if (!validatePassword) res.send('invalid password');
+
+	const newToken = jwt.sign(
+		{
+			username: user.username
+		},
+		process.env.TOKEN_SECRET,
+		{ expiresIn: 60 * 60 }
+	);
+
+	res.status(200).json({ token: newToken });
+	//    res.status(200).cookie("NewCookie", newToken, { path: "/" }).send("cookie");
+});
+
+app.get('/api/reviews', verifyToken, async (req, res) => {
+	const reviews = await prisma.reviews.findMany({
+		include: { users: true }
+	});
+	res.json({ reviews });
+});
+
+app.post('/api/reviews', async (req, res) => {
+	const review = await prisma.reviews.create({
+		data: {}
+	});
+});
 
 app.post('/api/posts', verifyToken, (req, res) => {
 	const username = req.user;
