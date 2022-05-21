@@ -1,4 +1,4 @@
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 export default function NavBar() {
 	return (
@@ -26,18 +26,18 @@ export default function NavBar() {
 						class="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
 					>
 						<li>
-							<Link to="/">
-								<a>Home</a>
+							<Link to="/map">
+								<>Map</>
 							</Link>
 						</li>
 						<li>
 							<Link to="/cafe">
-								<a>Cafe</a>
+								<>Cafe</>
 							</Link>
 						</li>
 						<li>
 							<Link to="/login">
-								<a>Login</a>
+								<>Login</>
 							</Link>
 						</li>
 					</ul>
