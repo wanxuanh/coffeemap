@@ -1,5 +1,5 @@
 import NavBar from './NavBar';
-import Register from './Signup';
+import Register from './Register';
 
 export default function Main() {
 	return <>

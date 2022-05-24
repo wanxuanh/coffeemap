@@ -3,7 +3,7 @@ import Cafe from './components/Cafe';
 import Login from './components/Login';
 import Main from './components/Main';
 import Map from './components/Map';
-import Register from './components/Signup'
+import Register from './components/Register'
 
 function App() {
 	return (
