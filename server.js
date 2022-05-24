@@ -97,14 +97,21 @@ app.post('/api/login', async (req, res) => {
 	//    res.status(200).cookie("NewCookie", newToken, { path: "/" }).send("cookie");
 });
 
-app.get('/api/reviews', verifyToken, async (req, res) => {
+app.get('/api/cafes', async (req, res) => {
+	const cafes = await prisma.cafes.findMany({
+		//include: { users: true }
+	});
+	res.json({ cafes });
+});
+
+app.get('/api/reviews', async (req, res) => {
 	const reviews = await prisma.reviews.findMany({
 		include: { users: true }
 	});
 	res.json({ reviews });
 });
 
-app.post('/api/reviews', async (req, res) => {
+app.post('/api/reviews',verifyToken, async (req, res) => {
 	const review = await prisma.reviews.create({
 		data: {}
 	});

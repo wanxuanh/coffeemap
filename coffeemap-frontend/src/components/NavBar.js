@@ -44,7 +44,7 @@ export default function NavBar() {
 				</div>
 			</div>
 			<div class="navbar-center">
-				<a class="btn btn-ghost normal-case text-xl"> ☕ Coffee Map</a>
+				<div class="btn btn-ghost normal-case text-xl"> ☕ Coffee Map</div>
 			</div>
 			<div class="navbar-end">
 				<button class="btn btn-ghost btn-circle">
