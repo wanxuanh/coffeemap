@@ -14,6 +14,8 @@ const cors = require('cors');
 const bodyParser = require("body-parser")
 const prisma = new PrismaClient();
 
+
+
 //MIDDLEWARE
 app.use(
   cors({
@@ -100,8 +102,27 @@ app.post('/api/login', async (req, res) => {
 app.get('/api/cafes', async (req, res) => {
 	const cafes = await prisma.cafes.findMany({
 		//include: { users: true }
+		
+
 	});
 	res.json({ cafes });
+});
+
+app.post('/api/cafes', async (req, res) => {
+	const cafename = req.body.cafename;
+	const address = req.address;
+	const offday = req.offday;
+
+	const cafes = await prisma.cafes.create({
+		data: {
+			cafename: cafename,
+			address: address,
+			offday: offday
+		}
+
+
+	});
+	res.status(200).json({cafes})
 });
 
 app.get('/api/reviews', async (req, res) => {

@@ -6,6 +6,7 @@ import Map from './components/Map';
 import Register from './components/Register'
 import NavBar from './components/NavBar';
 import Footer from './components/Footer'
+import CreateReview from './components/AddNewCafe';
 
 function App() {
 	return (
@@ -19,7 +20,11 @@ function App() {
 				<Route path="/login" element={<Login />} />
 				<Route path="/map" element={<Map />} />
 				<Route path="/register" element={<Register />} />
+				{/* Protected route */}
+				<Route path="/add" element={<CreateReview />} />
+
 			</Routes>
+
 					<Footer />
 
 		</BrowserRouter>
