@@ -9,7 +9,7 @@ export default function Register () {
   } = useForm();
 //   const onSubmit = (data) => console.log(data);
 
-const accountCreation =  (data, e) => {
+const onRegister =  (data, e) => {
 	e.preventDefault();
 		fetch('/api/signup', {
 			method: 'POST',
@@ -26,7 +26,7 @@ const accountCreation =  (data, e) => {
 	return <>
    
   <label>
-	   <form className="w-full max-w-lg m-auto py-10 mt-10 px-10 border" onSubmit={handleSubmit(accountCreation)}>
+	   <form className="w-full max-w-lg m-auto py-10 mt-10 px-10 border" onSubmit={handleSubmit(onRegister)}>
 		   	  Registration Form
 <div className="container">
             <div className="body d-md-flex align-items-center justify-content-between">

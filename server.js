@@ -11,16 +11,26 @@ const users = require('./users');
 const transactions = require('./transaction');
 const path = require('path');
 const cors = require('cors');
+const bodyParser = require("body-parser")
 const prisma = new PrismaClient();
 
 //MIDDLEWARE
-app.use(cors());
-
-app.use(express.json());
+app.use(
+  cors({
+    credentials: true,
+    origin: [
+      "http://localhost:3000",
+      "http://localhost:4000",
+      "https://coffeemap-backend.herokuapp.com/",
+    ],
+    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+  })
+);
+app.use(bodyParser.json());
 app.use(express.static('./coffeemap-frontend/build'));
 
 app.get('/', (req, res) => {
-	res.send('working');
+	res.send('backend running');
 });
 
 const verifyToken = (req, res, next) => {
