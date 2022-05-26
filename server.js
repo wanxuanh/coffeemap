@@ -143,7 +143,7 @@ app.get('/api/reviews', async (req, res) => {
 
 app.post('/api/reviews', async (req, res) => {
 	const body = req.body
-	const comments = body.cafename;
+	const comments = body.comments;
 	const withPowerPlug = body.withPowerPlug;
 	const imageurl = body.imageurl;
 	const USP = body.USP;
