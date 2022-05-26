@@ -1,8 +1,7 @@
 
 import {useForm} from 'react-hook-form'
 
-
-export default function AddNewCafe() {
+export default function AddReview() {
 
     	const {
     register,
@@ -13,7 +12,7 @@ export default function AddNewCafe() {
 
 	const handleAddNew = (data, e) => {
 			e.preventDefault();
-		fetch('/api/cafes', {
+		fetch('/api/reviews', {
 			method: 'POST',
 			credentials: "include",
 			headers: {
@@ -29,7 +28,7 @@ export default function AddNewCafe() {
 
 	return <>
 	  <form className="w-full max-w-lg m-auto py-10 mt-10 px-10 border bg-gray-100" onSubmit={handleSubmit(handleAddNew)}>
-		   	  <h2 class="font-medium leading-tight text-5xl mt-0 mb-2 text-black-600">add new cafe</h2>
+		   	  <h2 class="font-medium leading-tight text-5xl mt-0 mb-2 text-black-600">add your reviews</h2>
 <div className="container">
             <div className="body d-md-flex align-items-center justify-content-between">
                 <div className="box-1 mt-md-0 mt-5"> </div>

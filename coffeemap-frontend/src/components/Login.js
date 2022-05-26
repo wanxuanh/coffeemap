@@ -1,7 +1,10 @@
 import {useForm} from 'react-hook-form'
 import {useNavigate} from "react-router-dom"
+import useLocalStorage from "../hooks/useLocalStorage"
 
 export default function Login() {
+
+//	const [token, setToken] = useLocalStorage()
 
 	const {
     register,

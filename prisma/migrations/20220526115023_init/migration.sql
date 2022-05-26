@@ -12,10 +12,19 @@ CREATE TABLE "cafes" (
 -- CreateTable
 CREATE TABLE "reviews" (
     "id" SERIAL NOT NULL,
-    "comments" VARCHAR(255),
-    "imageurl" VARCHAR(255),
-    "cafeid" INTEGER,
-    "userid" INTEGER,
+    "comments" TEXT,
+    "withPowerPlug" BOOLEAN NOT NULL DEFAULT true,
+    "imageurl" TEXT,
+    "USP" TEXT,
+    "coffeeTexture" TEXT,
+    "coffeeBody" TEXT,
+    "coffeeAftertaste" TEXT,
+    "drinkName" TEXT,
+    "drinkPrice" DOUBLE PRECISION NOT NULL,
+    "originBlend" TEXT,
+    "datetime" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "cafeid" INTEGER NOT NULL,
+    "userid" INTEGER NOT NULL,
 
     CONSTRAINT "reviews_pkey" PRIMARY KEY ("id")
 );
@@ -29,6 +38,9 @@ CREATE TABLE "users" (
 
     CONSTRAINT "users_pkey" PRIMARY KEY ("id")
 );
+
+-- CreateIndex
+CREATE UNIQUE INDEX "cafes_cafename_key" ON "cafes"("cafename");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "users_username_key" ON "users"("username");

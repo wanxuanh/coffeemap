@@ -10,7 +10,7 @@ datasource db {
 
 model cafes {
   id   Int       @id @default(autoincrement())
-  cafename String    @db.VarChar(255)
+  cafename String    @db.VarChar(255) @unique
   address  String?   @db.VarChar(255)
   offday   String?   @db.VarChar(255)
   imageurl String?   @db.VarChar(255)
@@ -19,10 +19,19 @@ model cafes {
 
 model reviews {
   id Int     @id @default(autoincrement())
-  comments String? @db.VarChar(255)
-  imageurl String? @db.VarChar(255)
-  cafeid   Int?
-  userid   Int?
+  comments      String?
+  withPowerPlug Boolean  @default(true)
+  imageurl      String?
+  USP           String?
+  coffeeTexture String?
+  coffeeBody    String?
+  coffeeAftertaste  String?
+  drinkName String?
+  drinkPrice  Float
+  originBlend   String?
+  datetime      DateTime @default(now()) @updatedAt
+  cafeid   Int
+  userid   Int
   cafes    cafes?  @relation(fields: [cafeid], references: [id], onDelete: NoAction, onUpdate: NoAction)
   users    users?  @relation(fields: [userid], references: [id], onDelete: NoAction, onUpdate: NoAction)
 }

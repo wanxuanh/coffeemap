@@ -11,6 +11,7 @@ const users = require('./users');
 const transactions = require('./transaction');
 const path = require('path');
 const cors = require('cors');
+const cookieParser = require('cookie-parser')
 const bodyParser = require("body-parser")
 const prisma = new PrismaClient();
 
@@ -29,6 +30,7 @@ app.use(
   })
 );
 app.use(bodyParser.json());
+app.use(cookieParser())
 app.use(express.static('./coffeemap-frontend/build'));
 
 app.get('/', (req, res) => {
@@ -89,11 +91,17 @@ app.post('/api/login', async (req, res) => {
 
 	const newToken = jwt.sign(
 		{
-			username: user.username
+			username: user.username, id: user.id
 		},
 		process.env.TOKEN_SECRET,
 		{ expiresIn: 60 * 60 }
 	);
+
+	res.cookie("jwt_token", newToken, {
+		expires:new Date(Date.now() + 2 * 3600000),
+		path: "/",
+		httpOnly: true,
+	})
 
 	res.status(200).json({ token: newToken });
 	//    res.status(200).cookie("NewCookie", newToken, { path: "/" }).send("cookie");
@@ -110,14 +118,15 @@ app.get('/api/cafes', async (req, res) => {
 
 app.post('/api/cafes', async (req, res) => {
 	const cafename = req.body.cafename;
-	const address = req.address;
-	const offday = req.offday;
+	const address = req.body.address;
+	const offday = req.body.offday;
+	// console.log(req.cookies)
 
 	const cafes = await prisma.cafes.create({
 		data: {
 			cafename: cafename,
 			address: address,
-			offday: offday
+			offday: offday,
 		}
 
 
@@ -132,10 +141,40 @@ app.get('/api/reviews', async (req, res) => {
 	res.json({ reviews });
 });
 
-app.post('/api/reviews',verifyToken, async (req, res) => {
-	const review = await prisma.reviews.create({
-		data: {}
+app.post('/api/reviews', async (req, res) => {
+	const body = req.body
+	const comments = body.cafename;
+	const withPowerPlug = body.withPowerPlug;
+	const imageurl = body.imageurl;
+	const USP = body.USP;
+	const coffeeTexture = body.coffeeTexture;
+	const coffeeBody = body.coffeeBody;
+	const coffeeAftertaste = body.coffeeAftertaste;
+	const drinkName = body.drinkName;
+	const drinkPrice = body.drinkPrice;
+	const originBlend = body.originBlend
+	const userId = jwt.decode(req.cookies.jwt_token)
+	console.log(req.cookies)
+
+	const reviews = await prisma.reviews.create({
+		data: {
+			comments: comments,
+			withPowerPlug: withPowerPlug,
+			imageurl: imageurl,
+			USP: USP,
+			coffeeTexture: coffeeTexture,
+			coffeeBody: coffeeBody,
+			coffeeAftertaste: coffeeAftertaste,
+			drinkName: drinkName,
+			drinkPrice: drinkPrice,
+			originBlend: originBlend,
+			cafeid: 1,
+			userid: userId.id
+			
+		}
+
 	});
+	res.status(200).json({reviews})
 });
 
 app.post('/api/posts', verifyToken, (req, res) => {

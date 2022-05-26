@@ -6,7 +6,8 @@ import Map from './components/Map';
 import Register from './components/Register'
 import NavBar from './components/NavBar';
 import Footer from './components/Footer'
-import CreateReview from './components/AddNewCafe';
+import AddReview from './components/AddReview';
+import AddNewCafe from './components/AddNewCafe';
 
 function App() {
 	return (
@@ -21,7 +22,8 @@ function App() {
 				<Route path="/map" element={<Map />} />
 				<Route path="/register" element={<Register />} />
 				{/* Protected route */}
-				<Route path="/add" element={<CreateReview />} />
+				<Route path="/add" element={<AddNewCafe />} />
+				<Route path="/review" element={<AddReview	 />} />
 
 			</Routes>
 
