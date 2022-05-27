@@ -9,6 +9,8 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
+import CircularProgress from '@mui/material/CircularProgress';
+
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -33,42 +35,50 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
  
 export default function Cafe () {
 
-        const [cafes, setCafes] = useState([])
+        const [cafes, setCafes] = useState([]);
+        const [searchInput, setSearchInput] = useState("")
+        const [loading, setLoading] = useState(false)
+
 
         useEffect(() => {
+          setLoading(true)
+          setTimeout(() => {
             axios.get('/api/cafes', {
                 withCredentials: true
             })
             .then((res) => {
                 setCafes(res.data.cafes)
+                setLoading(false);
+
             })
             .catch((error) => console.log(error));
-    }, [])
+    },500)}, [])
 
-      function filterFunction() {
-    let input, filter, table, tr, td, i, txtValue;
-    input = document.getElementById("myInput");
-    filter = input.value.toUpperCase();
-    table = document.getElementById("myTable");
-    tr = table.getElementsByTagName("tr");
-    for (i = 0; i < tr.length; i++) {
-        td = tr[i].getElementsByTagName("td")[0];
-        if (td) {
-        txtValue = td.textContent || td.innerText;
-        if (txtValue.toUpperCase().indexOf(filter) > -1) {
-            tr[i].style.display = "";
-        } else {
-            tr[i].style.display = "none";
-        }
-        }       
-    }}
+      const filterFunction = () => {
+        let input, filter, tr, td, i;
+        input = document.getElementById("myInput");
+        filter = input.value.toUpperCase();
+        setSearchInput(filter)
+        tr = cafes;
+        for (i = 0; i < tr.length; i++) {
+            td = tr[i].cafename+" "+tr[i].address;
+            if (td) {
+            if (td.toUpperCase().indexOf(filter) > -1) {
+              tr[i].display=""
+            } else {
+                tr[i].display = "none";
+            }
+            }       
+        }}
 
 return <> 
 
-<div className="table">
-        <input type="text" id="myInput" onkeyup="filterFunction()" placeholder="Search for names.." title="Type in a name"></input>
 
-          <TableContainer align="center" component={Paper}>
+{loading && <div style={{margin:"auto" , width:"40px"}}><CircularProgress/></div>}
+	 {!loading && 
+   <div className="table">
+        <input type="text" id="myInput" onChange={filterFunction} placeholder="Search for names.." title="Type in a name"></input>
+        <TableContainer align="center" component={Paper}>
             <Table sx={{ maxWidth: 700 }} aria-label="customized table">
               {" "}
               <TableHead>
@@ -81,7 +91,7 @@ return <>
               </TableHead>
               <TableBody>
                 {cafes.map((cafes) => (
-                  <TableRow key={cafes.cafename}>
+                  <TableRow key={cafes.cafename} style={{display: `${cafes.display}`}}>
                     <TableCell>
                       {/* <Link to={`/companyinfo?stock=${item.symbol}`}> */}
                         {cafes.cafename}
@@ -97,7 +107,8 @@ return <>
                 ))}
               </TableBody>
             </Table>
-          </TableContainer>
-        </div>
+          </TableContainer>  </div>}
+         
+       
 </>
 }
