@@ -20,7 +20,6 @@ export default function AddReview() {
 			},
 			body: JSON.stringify(data)
 
-			//body: JSON.stringify({ username: 'wanxuan.ho@gmail.com', password: '1234' })
 		})
 			.then((res) => res.json())
 			.then((res) => console.log(res));
@@ -54,8 +53,8 @@ export default function AddReview() {
       {errors.originBlend && <p style={{ color: "red" }}>* required.</p>}  
        <h6 class="font-medium leading-tight text-base mt-0 mb-2 text-blue-600">cafeid: <input style={{color:"black"}}{...register('cafeid', { required: true })} /></h6>
       {errors.cafeid && <p style={{ color: "red" }}>* required.</p>}  
-         <h6 class="font-medium leading-tight text-base mt-0 mb-2 text-blue-600">userid: <input style={{color:"black"}}{...register('userid', { required: true })} /></h6>
-      {errors.userid && <p style={{ color: "red" }}>* required.</p>}  
+         {/* <h6 class="font-medium leading-tight text-base mt-0 mb-2 text-blue-600">userid: <input style={{color:"black"}}{...register('userid', { required: true })} /></h6>
+      {errors.userid && <p style={{ color: "red" }}>* required.</p>}   */}
 
 	<input className="mt-4 w-full bg-green-400 hover:bg-green-600 text-green-100 border shadow py-3 px-6 font-semibold text-md rounded" type="submit" /><br/>
 

@@ -4,7 +4,7 @@ import useLocalStorage from "../hooks/useLocalStorage"
 
 export default function Login() {
 
-//	const [token, setToken] = useLocalStorage()
+	//const [token, setToken] = useLocalStorage("token")
 
 	const {
     register,
@@ -25,11 +25,9 @@ const navigate = useNavigate();
 			},
 			body: JSON.stringify(data)
 
-			//body: JSON.stringify({ username: 'wanxuan.ho@gmail.com', password: '1234' })
 		})
 			.then((res) => res.json())
-			.then((res) => console.log(res));
-			navigate("/cafe")
+			.then((res) => res.token ? navigate("/cafe") : alert('authentication failed'));
 	};
 
 	return <>

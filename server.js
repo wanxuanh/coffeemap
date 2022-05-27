@@ -61,7 +61,7 @@ app.post('/api/signup', async (req, res) => {
 	const salt = await bcrypt.genSalt(10);
 
 	if (!(data.username && data.password)) {
-		return res.status(400).send({ error: error.message });
+		return res.status(400).json({ error: error.message });
 	}
 	try {
 		data.password = await bcrypt.hash(data.password, salt);
@@ -83,28 +83,26 @@ app.post('/api/login', async (req, res) => {
 	});
 
 	if (!user) {
-		res.send('invalid user');
+		res.send({message: 'invalid user'});
+		return;
 	}
 
 	const validatePassword = bcrypt.compareSync(password, user.password);
-	if (!validatePassword) res.send('invalid password');
+	if (!validatePassword) {
+		res.json({message: 'invalid password'})
+	return;
+	}
 
 	const newToken = jwt.sign(
-		{
-			username: user.username, id: user.id
-		},
-		process.env.TOKEN_SECRET,
-		{ expiresIn: 60 * 60 }
+    { username: user.username, email: user.email, id: user.id },
+    process.env.TOKEN_SECRET
 	);
-
 	res.cookie("jwt_token", newToken, {
-		expires:new Date(Date.now() + 2 * 3600000),
+		expires: new Date(Date.now() + 16 * 3600000),
 		path: "/",
 		httpOnly: true,
-	})
-
-	res.status(200).json({ token: newToken });
-	//    res.status(200).cookie("NewCookie", newToken, { path: "/" }).send("cookie");
+	});
+	res.status(200).json({token: newToken });
 });
 
 app.get('/api/cafes', async (req, res) => {
@@ -142,39 +140,35 @@ app.get('/api/reviews', async (req, res) => {
 });
 
 app.post('/api/reviews', async (req, res) => {
-	const body = req.body
-	const comments = body.comments;
-	const withPowerPlug = body.withPowerPlug;
-	const imageurl = body.imageurl;
-	const USP = body.USP;
-	const coffeeTexture = body.coffeeTexture;
-	const coffeeBody = body.coffeeBody;
-	const coffeeAftertaste = body.coffeeAftertaste;
-	const drinkName = body.drinkName;
-	const drinkPrice = body.drinkPrice;
-	const originBlend = body.originBlend
+	
+	//const datetimeISO = new Date(req.body.datatime).toISOString();
 	const userId = jwt.decode(req.cookies.jwt_token)
 	console.log(req.cookies)
 
-	const reviews = await prisma.reviews.create({
+	try { 
+		const reviews = await prisma.reviews.create({
 		data: {
-			comments: comments,
-			withPowerPlug: withPowerPlug,
-			imageurl: imageurl,
-			USP: USP,
-			coffeeTexture: coffeeTexture,
-			coffeeBody: coffeeBody,
-			coffeeAftertaste: coffeeAftertaste,
-			drinkName: drinkName,
-			drinkPrice: drinkPrice,
-			originBlend: originBlend,
+			comments: req.body.comments,
+			withPowerPlug: req.body.withPowerPlug,
+			imageurl: req.body.imageurl,
+			USP: req.body.USP,
+			coffeeTexture: req.body.coffeeTexture,
+			coffeeBody: req.body.coffeeBody,
+			coffeeAftertaste: req.body.coffeeAftertaste,
+			drinkName: req.body.drinkName,
+			drinkPrice: req.body.drinkPrice,
+			originBlend: req.body.originBlend,
+			//datetime: datetimeISO,
 			cafeid: 1,
 			userid: userId.id
-			
 		}
 
 	});
 	res.status(200).json({reviews})
+	}
+	catch (error) {
+      res.status(400).send({ msg: error.message });
+	}
 });
 
 app.post('/api/posts', verifyToken, (req, res) => {
