@@ -9,3 +9,10 @@ body {
   background-repeat: no-repeat;
   background-size: cover;
 }
+
+.input{
+  display:block;
+  margin-right: auto;
+  margin-left: auto;
+  text-align: center;
+}

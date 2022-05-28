@@ -56,7 +56,7 @@ const themeDark = createTheme({
 			</Routes>
 
 					<Footer />
-</ThemeProvider>>
+</ThemeProvider>
 		</BrowserRouter>
 		</>
 
