@@ -14,6 +14,7 @@ import {useState} from 'react'
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import Button from "@mui/material/Button";
 import Reviews from './components/Review'
+import Logout from './components/Logout'
 import './App.css'
 
 
@@ -52,6 +53,8 @@ const themeDark = createTheme({
 				<Route path="/review" element={<AddReview	 />} />
 				<Route path="/profile" element={<Profile	 />} />
 				<Route path="/reviews" element={<Reviews	 />} />
+
+				<Route path="/logout" element={<Logout	 />} />
 
 			</Routes>
 

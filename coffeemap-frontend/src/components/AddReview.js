@@ -1,5 +1,9 @@
 
 import {useForm} from 'react-hook-form'
+import { useState } from "react";
+
+import CircularProgress from '@mui/material/CircularProgress';
+import { useNavigate } from 'react-router-dom';
 
 export default function AddReview() {
 
@@ -8,12 +12,16 @@ export default function AddReview() {
     handleSubmit,
     formState: { errors },
   } = useForm();
-//   const onSubmit = (data) => console.log(data);
+
+      let navigate = useNavigate();
+
+  const [loading, setLoading] = useState(false)
 
 	const handleAddNew = (data, e) => {
-			e.preventDefault();
-      console.log(data)
-		fetch('/api/reviews', {
+      e.preventDefault();
+      setLoading(true)
+
+setTimeout(() => {fetch('/api/reviews', {
 			method: 'POST',
 			credentials: "include",
 			headers: {
@@ -23,10 +31,15 @@ export default function AddReview() {
 
 		})
 			.then((res) => res.json())
-			.then((res) => console.log(res));
-	};
+			.then((res) => console.log(res))
+      .then(setLoading(false))
+      navigate("/reviews");
+
+	},1000)		
+  }
 
 	return <div className="App">
+
 	  <form className="w-full max-w-lg m-auto py-10 mt-10 px-10 border bg-gray-100" onSubmit={handleSubmit(handleAddNew)}>
 		   	  <h2 class="font-medium leading-tight text-5xl mt-0 mb-2 text-black-600">add your reviews</h2>
                 <div className="container">
@@ -34,10 +47,10 @@ export default function AddReview() {
                 <div className="box-1 mt-md-0 mt-5"> </div>
                 <div className=" box-2 d-flex flex-column h-100">
                 <div className="text-gray-600 font-medium">
+
     <h6 class="font-medium leading-tight text-base mt-0 mb-2 text-blue-600">comments: <input style={{color:"black"}}{...register('comments', { required: true })} /></h6>
 	       {errors.comments && <p style={{ color: "red" }}>* required.</p>}
-    {/* <h6 class="font-medium leading-tight text-base mt-0 mb-2 text-blue-600">withPowerPlug: <input style={{color:"black"}}{...register('withPowerPlug')} /></h6>
-      {errors.withPowerPlug && <p style={{ color: "red" }}>* required.</p>} */}
+    
 	<h6 class="font-medium leading-tight text-base mt-0 mb-2 text-blue-600">USP: <input style={{color:"black"}}{...register('USP', { required: true })} /></h6>
       {errors.USP && <p style={{ color: "red" }}>* required.</p>}
     <h6 class="font-medium leading-tight text-base mt-0 mb-2 text-blue-600">coffeeTexture: <input style={{color:"black"}}{...register('coffeeTexture', { required: true })} /></h6>
@@ -54,8 +67,8 @@ export default function AddReview() {
       {errors.originBlend && <p style={{ color: "red" }}>* required.</p>}  
        <h6 class="font-medium leading-tight text-base mt-0 mb-2 text-blue-600">cafeid: <input style={{color:"black"}}{...register('cafeid', { required: true })} /></h6>
       {errors.cafeid && <p style={{ color: "red" }}>* required.</p>}  
-
-	<input className="mt-4 w-full bg-green-400 hover:bg-green-600 text-green-100 border shadow py-3 px-6 font-semibold text-md rounded" type="submit" /><br/>
+{loading && <div style={{margin:"auto" , width:"40px"}}><CircularProgress/></div>}
+	 {!loading &&	<input className="mt-4 w-full bg-green-400 hover:bg-green-600 text-green-100 border shadow py-3 px-6 font-semibold text-md rounded" type="submit" />}
 
 	  </div></div></div></div>
     </form>

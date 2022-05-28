@@ -217,7 +217,9 @@ app.delete("/api/delete", async (req, res) => {
 
 	try{	
 		const deletereviews = await prisma.reviews.deleteMany({
-		
+			where:{
+				userid: userId.id
+			}
 		});	
 		res.status(200).json({deletereviews})
 	}
@@ -226,9 +228,9 @@ app.delete("/api/delete", async (req, res) => {
 	}
 })
 
-// app.post("/logout", (req, res) => {
-//     res.clearCookie("NewCookie").send("cookie dead")
-// })
+app.post("/logout", (req, res) => {
+    res.clearCookie("NewCookie").send("cookie dead")
+})
 
 /******React router to work on express****/
 app.get('/*', (req, res) => {

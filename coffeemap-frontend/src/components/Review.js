@@ -1,6 +1,5 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
-import {Link} from 'react-router-dom'
 import "./Cafe.css"
 import { styled } from "@mui/material/styles";
 import Table from "@mui/material/Table";
@@ -45,7 +44,7 @@ export default function Cafe () {
 
 
         useEffect(() => {
-          {
+        
             axios.get('/api/reviews', {
                 withCredentials: true
             })
@@ -64,8 +63,7 @@ export default function Cafe () {
             })
             
             .catch((error) => console.log(error));
-          }
-    }, [])
+          }, [])
 
       const filterFunction = () => {
         let input, filter, tr, td, i;

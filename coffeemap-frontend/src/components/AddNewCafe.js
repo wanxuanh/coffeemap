@@ -1,5 +1,9 @@
 
 import {useForm} from 'react-hook-form'
+import { useState, useEffect } from "react";
+import CircularProgress from '@mui/material/CircularProgress';
+import { useNavigate } from "react-router-dom";
+
 
 
 export default function AddNewCafe() {
@@ -9,11 +13,14 @@ export default function AddNewCafe() {
     handleSubmit,
     formState: { errors },
   } = useForm();
-//   const onSubmit = (data) => console.log(data);
+      let navigate = useNavigate();
+
+  const [loading, setLoading] = useState(false)
 
 	const handleAddNew = (data, e) => {
-			e.preventDefault();
-		fetch('/api/cafes', {
+		e.preventDefault();
+		setLoading(true)
+		setTimeout(() => {fetch('/api/cafes', {
 			method: 'POST',
 			credentials: "include",
 			headers: {
@@ -21,10 +28,15 @@ export default function AddNewCafe() {
 			},
 			body: JSON.stringify(data)
 
-			//body: JSON.stringify({ username: 'wanxuan.ho@gmail.com', password: '1234' })
 		})
 			.then((res) => res.json())
-			.then((res) => console.log(res));
+			
+			.then((res) => console.log(res))
+			.then(setLoading(false))
+			navigate("/cafe")
+			},1000)
+			
+		
 	};
 
 	return <>
@@ -45,7 +57,8 @@ export default function AddNewCafe() {
       {errors.neighbourhood && <p style={{ color: "red" }}>* required.</p>}
 	  <h6 class="font-medium leading-tight text-base mt-0 mb-2 text-blue-600">pin: <input style={{color:"black"}}{...register('longtitude', { required: true })} /></h6>
       {errors.longtitude && <p style={{ color: "red" }}>* required.</p>}
-	  <input className="mt-4 w-full bg-green-400 hover:bg-green-600 text-green-100 border shadow py-3 px-6 font-semibold text-md rounded" type="submit" /><br/>
+	  {loading && <div style={{margin:"auto" , width:"40px"}}><CircularProgress/></div>}
+	 {!loading && <input className="mt-4 w-full bg-green-400 hover:bg-green-600 text-green-100 border shadow py-3 px-6 font-semibold text-md rounded" type="submit" />}
 
 	  </div></div></div></div>
     </form>
