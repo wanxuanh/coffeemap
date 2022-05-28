@@ -12,6 +12,7 @@ export default function AddReview() {
 
 	const handleAddNew = (data, e) => {
 			e.preventDefault();
+      console.log(data)
 		fetch('/api/reviews', {
 			method: 'POST',
 			credentials: "include",
@@ -25,7 +26,7 @@ export default function AddReview() {
 			.then((res) => console.log(res));
 	};
 
-	return <>
+	return <div className="App">
 	  <form className="w-full max-w-lg m-auto py-10 mt-10 px-10 border bg-gray-100" onSubmit={handleSubmit(handleAddNew)}>
 		   	  <h2 class="font-medium leading-tight text-5xl mt-0 mb-2 text-black-600">add your reviews</h2>
                 <div className="container">
@@ -47,8 +48,8 @@ export default function AddReview() {
       {errors.coffeeAftertaste && <p style={{ color: "red" }}>* required.</p>} 
     <h6 class="font-medium leading-tight text-base mt-0 mb-2 text-blue-600">drinkName: <input style={{color:"black"}}{...register('drinkName', { required: true })} /></h6>
       {errors.drinkName && <p style={{ color: "red" }}>* required.</p>}
-    {/* <h6 class="font-medium leading-tight text-base mt-0 mb-2 text-blue-600">drinkPrice: <input style={{color:"black"}}{...register('drinkPrice', { required: true })} /></h6>
-      {errors.drinkPrice && <p style={{ color: "red" }}>* required.</p>} */}
+    <h6 class="font-medium leading-tight text-base mt-0 mb-2 text-blue-600">drinkPrice: <input style={{color:"black"}}{...register('drinkPrice', { required: true })} /></h6>
+      {errors.drinkPrice && <p style={{ color: "red" }}>* required.</p>}
       <h6 class="font-medium leading-tight text-base mt-0 mb-2 text-blue-600">originBlend: <input style={{color:"black"}}{...register('originBlend', { required: true })} /></h6>
       {errors.originBlend && <p style={{ color: "red" }}>* required.</p>}  
        <h6 class="font-medium leading-tight text-base mt-0 mb-2 text-blue-600">cafeid: <input style={{color:"black"}}{...register('cafeid', { required: true })} /></h6>
@@ -60,5 +61,5 @@ export default function AddReview() {
 
 	  </div></div></div></div>
     </form>
-    	</>;
+    	</div>;
 }

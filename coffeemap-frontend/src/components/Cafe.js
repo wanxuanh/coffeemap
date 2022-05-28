@@ -61,7 +61,7 @@ export default function Cafe () {
         setSearchInput(filter)
         tr = cafes;
         for (i = 0; i < tr.length; i++) {
-            td = tr[i].cafename+" "+tr[i].address;
+            td = tr[i].cafename+" "+tr[i].address+" "+tr[i].neighbourhood;
             if (td) {
             if (td.toUpperCase().indexOf(filter) > -1) {
               tr[i].display=""
@@ -86,6 +86,7 @@ return <>
                   <StyledTableCell>Cafe List </StyledTableCell>
                   <StyledTableCell>Address</StyledTableCell>
                    <StyledTableCell>Off Day</StyledTableCell>
+                   <StyledTableCell>Neighourhood</StyledTableCell>
                    
                 </StyledTableRow>
               </TableHead>
@@ -100,9 +101,12 @@ return <>
                     <TableCell>
                       {/* <Link to={`/price?stock=${item.symbol}`}> */}
                         {cafes.address}
-                      {/* </Link> */}
                     </TableCell>{" "}
                     <TableCell>{cafes.offday}</TableCell>{" "}
+                     <TableCell>
+                        {cafes.neighbourhood}
+                    </TableCell>{" "}
+                    
                   </TableRow>
                 ))}
               </TableBody>

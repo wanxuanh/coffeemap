@@ -30,10 +30,10 @@ const onRegister =  (data, e) => {
 
 	};
 
-	return <>
+	return <div className="App">
    
   <label>
-	   <form className="w-full max-w-lg m-auto py-10 mt-10 px-10 border bg-teal-200" onSubmit={handleSubmit(onRegister)}>
+	   <form className="w-full max-w-lg m-auto py-10 mt-10 px-10 border bg-teal-400" onSubmit={handleSubmit(onRegister)}>
 		   	  <h1 class="font-medium leading-tight text-5xl mt-0 mb-2 text-black-600">Registration Form</h1>
 <div className="container">
             <div className="body d-md-flex align-items-center justify-content-between">
@@ -52,5 +52,5 @@ const onRegister =  (data, e) => {
 
   </label>
 
-</>;
+</div>;
 }

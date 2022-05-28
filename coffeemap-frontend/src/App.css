@@ -1,4 +1,11 @@
 body {
   text-align: center;
-    height: 100vh;
+  height: 100vh;
+}
+
+.App {
+  background: url("./images/coffee.jpg") no-repeat;
+  height: 1000px;
+  background-repeat: no-repeat;
+  background-size: cover;
 }

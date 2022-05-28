@@ -38,7 +38,7 @@ const navigate = useNavigate();
 		
 	};
 
-	return <>
+	return <div className="App">
 	
 	
 	<label>
@@ -64,5 +64,5 @@ const navigate = useNavigate();
 
   </label>
 
-</>
+</div>
 }

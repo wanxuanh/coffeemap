@@ -125,6 +125,8 @@ app.post('/api/cafes', async (req, res) => {
 			cafename: cafename,
 			address: address,
 			offday: offday,
+			neighbourhood: req.body.neighbourhood,
+			longtitude: req.body.longtitude
 		}
 
 
@@ -144,7 +146,7 @@ app.post('/api/reviews', async (req, res) => {
 	//const datetimeISO = new Date(req.body.datatime).toISOString();
 	const userId = jwt.decode(req.cookies.jwt_token)
 	console.log(req.cookies)
-
+	console.log(req.body)
 	try { 
 		const reviews = await prisma.reviews.create({
 		data: {

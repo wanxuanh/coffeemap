@@ -13,22 +13,25 @@ model cafes {
   cafename String    @db.VarChar(255) @unique
   address  String?   @db.VarChar(255)
   offday   String?   @db.VarChar(255)
+  neighbourhood String? @db.VarChar(255)
+  longtitude String? @db.VarChar(255)
+  latitude String? @db.VarChar(255)
   imageurl String?   @db.VarChar(255)
   reviews  reviews[]
 }
 
 model reviews {
   id Int     @id @default(autoincrement())
-  comments      String?
+  comments      String? @db.VarChar(255)
   withPowerPlug Boolean  @default(true)
-  imageurl      String?
-  USP           String?
-  coffeeTexture String?
-  coffeeBody    String?
-  coffeeAftertaste  String?
-  drinkName String?
-  drinkPrice  Float
-  originBlend   String?
+  imageurl      String? @db.VarChar(255)
+  USP           String? @db.VarChar(255)
+  coffeeTexture String? @db.VarChar(255)
+  coffeeBody    String? @db.VarChar(255)
+  coffeeAftertaste  String? @db.VarChar(255)
+  drinkName String? @db.VarChar(255)
+  drinkPrice  String? @db.VarChar(255)
+  originBlend   String? @db.VarChar(255)
   datetime      DateTime @default(now()) @updatedAt
   cafeid   Int
   userid   Int
