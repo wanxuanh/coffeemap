@@ -72,6 +72,17 @@ app.post('/api/signup', async (req, res) => {
 	}
 });
 
+app.get('/api/user', async (req, res) => {
+	const userId = jwt.decode(req.cookies.jwt_token)
+
+	const user = await prisma.users.findUnique({
+		where: {
+			id : userId.id
+		}
+	});
+	res.json(user)
+})
+
 app.post('/api/login', async (req, res) => {
 	const data = req.body;
 	const { username, password } = data;
@@ -104,6 +115,27 @@ app.post('/api/login', async (req, res) => {
 	});
 	res.status(200).json({token: newToken });
 });
+
+app.put("/api/update", async (req, res) => {
+		const userId = jwt.decode(req.cookies.jwt_token)
+
+ try {
+    const {id, name} = req.body
+	const updatedUser = await prisma.users.update({
+		where: {
+			id:userId.id
+		},
+		data:{
+			name: name
+		}
+	})
+      res.status(200).json(updatedUser)
+  }
+  catch (error) {
+    res.status(500).send(error.message)
+  }
+})
+
 
 app.get('/api/cafes', async (req, res) => {
 	const cafes = await prisma.cafes.findMany({
@@ -161,7 +193,7 @@ app.post('/api/reviews', async (req, res) => {
 			drinkPrice: req.body.drinkPrice,
 			originBlend: req.body.originBlend,
 			//datetime: datetimeISO,
-			cafeid: 1,
+			cafeid: parseInt(req.body.cafeid),
 			userid: userId.id
 		}
 
@@ -178,6 +210,23 @@ app.post('/api/posts', verifyToken, (req, res) => {
 	const userTransactions = transactions[username];
 	res.status(200).json({ transactions: userTransactions });
 });
+
+app.delete("/api/delete", async (req, res) => {
+
+		const userId = jwt.decode(req.cookies.jwt_token)
+
+	try{	
+		const deletereviews = await prisma.reviews.deleteMany({
+			where: {
+				userid: userId.id,
+			}
+		});	
+		res.status(200).json({deletereviews})
+	}
+	catch (error) {
+      res.status(400).send({ msg: error.message });
+	}
+})
 
 // app.post("/logout", (req, res) => {
 //     res.clearCookie("NewCookie").send("cookie dead")

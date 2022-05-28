@@ -1,5 +1,6 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
+import {Link} from 'react-router-dom'
 import "./Cafe.css"
 import { styled } from "@mui/material/styles";
 import Table from "@mui/material/Table";
@@ -94,9 +95,9 @@ return <>
                 {cafes.map((cafes) => (
                   <TableRow key={cafes.cafename} style={{display: `${cafes.display}`}}>
                     <TableCell>
-                      {/* <Link to={`/companyinfo?stock=${item.symbol}`}> */}
+                       <Link to={`/cafe=${cafes.cafename}`}>
                         {cafes.cafename}
-                      {/* </Link> */}
+                       </Link> 
                     </TableCell>{" "}
                     <TableCell>
                       {/* <Link to={`/price?stock=${item.symbol}`}> */}

@@ -8,6 +8,8 @@ import NavBar from './components/NavBar';
 import Footer from './components/Footer'
 import AddReview from './components/AddReview';
 import AddNewCafe from './components/AddNewCafe';
+import Profile from './components/Profile'
+import NavBar2 from './components/Navbar2'
 import './App.css'
 
 function App() {
@@ -15,7 +17,7 @@ function App() {
 		<>		
 		
 		<BrowserRouter>
-		<NavBar />
+		<NavBar2 />
 			<Routes>
 				<Route path="/" element={<Main />} />
 				<Route path="/cafe" element={<Cafe />} />
@@ -25,6 +27,8 @@ function App() {
 				{/* Protected route */}
 				<Route path="/add" element={<AddNewCafe />} />
 				<Route path="/review" element={<AddReview	 />} />
+				<Route path="/profile" element={<Profile	 />} />
+
 
 			</Routes>
 
