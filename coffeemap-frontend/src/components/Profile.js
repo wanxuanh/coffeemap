@@ -38,8 +38,8 @@ const [userDetails, setUserDetails] = useState("")
 		})
 			.then((res) => res.json())
 			.then((res) => console.log(res));
-			alert("User registered, proceed to login");
-			navigate("/cafe")
+			//alert("User registered, proceed to login");
+			//navigate("/login")
 
 	};
     

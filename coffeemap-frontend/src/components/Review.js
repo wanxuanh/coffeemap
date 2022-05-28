@@ -33,36 +33,48 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   },
 }));
 
- 
+   
+
 export default function Cafe () {
 
-        const [cafes, setCafes] = useState([]);
+     
         const [searchInput, setSearchInput] = useState("")
         const [loading, setLoading] = useState(false)
+        const [reviews, setReviews] = useState([]);
+        const [cafes, setCafes] = useState([])
 
 
         useEffect(() => {
-          setLoading(true)
-          setTimeout(() => {
+          {
+            axios.get('/api/reviews', {
+                withCredentials: true
+            })
+            .then((res) => {
+                setReviews(res.data.reviews)
+
+            })
+            .catch((error) => console.log(error));
+
             axios.get('/api/cafes', {
                 withCredentials: true
             })
             .then((res) => {
                 setCafes(res.data.cafes)
-                setLoading(false);
 
             })
+            
             .catch((error) => console.log(error));
-    },500)}, [])
+          }
+    }, [])
 
       const filterFunction = () => {
         let input, filter, tr, td, i;
         input = document.getElementById("myInput");
         filter = input.value.toUpperCase();
         setSearchInput(filter)
-        tr = cafes;
+        tr = reviews;
         for (i = 0; i < tr.length; i++) {
-            td = tr[i].cafename+" "+tr[i].address+" "+tr[i].neighbourhood;
+            td = tr[i].comments+" "+tr[i].USP+" "+tr[i].drinkName;
             if (td) {
             if (td.toUpperCase().indexOf(filter) > -1) {
               tr[i].display=""
@@ -84,28 +96,40 @@ return <div className="center">
               {" "}
               <TableHead>
                 <StyledTableRow>
-                  <StyledTableCell>Cafe Name </StyledTableCell>
-                  <StyledTableCell>Address</StyledTableCell>
-                   <StyledTableCell>Off Day</StyledTableCell>
-                   <StyledTableCell>Neighourhood</StyledTableCell>
+                 <StyledTableCell>Cafe Name </StyledTableCell>
+                  <StyledTableCell>Comments </StyledTableCell>
+                  <StyledTableCell>Must try food</StyledTableCell>
+                   <StyledTableCell>Must try Drink</StyledTableCell>
+                   <StyledTableCell>Price</StyledTableCell>
+                   <StyledTableCell>Reviewed by</StyledTableCell>
+                   
                    
                 </StyledTableRow>
               </TableHead>
               <TableBody>
-                {cafes.map((cafes) => (
-                  <TableRow key={cafes.cafename} style={{display: `${cafes.display}`}}>
-                    <TableCell>
-                       <Link to={`/cafe=${cafes.cafename}`}>
-                        {cafes.cafename}
-                       </Link> 
+
+                {reviews.map((reviews) => (
+                  <TableRow key={reviews.comments} style={{display: `${reviews.display}`}}>
+                    
+                       <TableCell>
+                       
+                       
+                    
+                    </TableCell>{" "}<TableCell>
+
+                        {reviews.comments}
+                    
                     </TableCell>{" "}
                     <TableCell>
                       {/* <Link to={`/price?stock=${item.symbol}`}> */}
-                        {cafes.address}
+                        {reviews.USP}
                     </TableCell>{" "}
-                    <TableCell>{cafes.offday}</TableCell>{" "}
+                    <TableCell>{reviews.drinkName}</TableCell>{" "}
                      <TableCell>
-                        {cafes.neighbourhood}
+                        {reviews.drinkPrice}
+                    </TableCell>{" "}
+                       <TableCell>
+                        {reviews.users.name}
                     </TableCell>{" "}
                     
                   </TableRow>

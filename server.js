@@ -217,9 +217,7 @@ app.delete("/api/delete", async (req, res) => {
 
 	try{	
 		const deletereviews = await prisma.reviews.deleteMany({
-			where: {
-				userid: userId.id,
-			}
+		
 		});	
 		res.status(200).json({deletereviews})
 	}

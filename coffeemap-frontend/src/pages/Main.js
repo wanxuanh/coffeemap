@@ -1,8 +1,8 @@
-import Register from '../components/Register';
+import Login from '../components/Login';
 
 export default function Main() {
 	return <>
 \
-	<Register />
+	<Login />
 \	</>;
 }

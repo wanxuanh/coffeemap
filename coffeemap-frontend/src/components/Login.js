@@ -1,26 +1,32 @@
-import {useForm} from 'react-hook-form'
-import {useNavigate} from "react-router-dom"
-import useLocalStorage from "../hooks/useLocalStorage"
+import React from "react";
+import { useState, useEffect } from "react";
+import Avatar from "@mui/material/Avatar";
+import Button from "@mui/material/Button";
+import CssBaseline from "@mui/material/CssBaseline";
+import TextField from "@mui/material/TextField";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import Checkbox from "@mui/material/Checkbox";
+import Link from "@mui/material/Link";
+import Grid from "@mui/material/Grid";
+import Box from "@mui/material/Box";
+import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
+import Typography from "@mui/material/Typography";
+import Container from "@mui/material/Container";
+import { useNavigate } from "react-router-dom";
 import CircularProgress from '@mui/material/CircularProgress';
-import {useState} from 'react'
 
 
 export default function Login() {
 
-	//const [token, setToken] = useLocalStorage("token")
-	const [loading, setLoading] = useState(false)
+  const [username, setUsername] = useState({});
+  const [password, setPassword] = useState({});
+  const [loading, setLoading] = useState(false)
 
-	const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm();
 
-const navigate = useNavigate();
+  let navigate = useNavigate();
 
-	const handleLogin = (data, e) => {
-			e.preventDefault();
-			setLoading(true)
+  const checkUser = (userInfo) => {
+   setLoading(true)
 			setTimeout(() => {
 				fetch('/api/login', {
 				method: 'POST',
@@ -28,41 +34,100 @@ const navigate = useNavigate();
 				headers: {
 					'Content-Type': 'application/json'
 				},
-				body: JSON.stringify(data)
+				body: JSON.stringify(userInfo)
 
 			})
 				.then((res) => res.json())
 				.then((res) => res.token ? navigate("/cafe") : alert('authentication failed'))
 				.then(setLoading(false));
-				},500)
-		
-	};
+				},1000)
+  }
 
-	return <div className="App">
-	
-	
-	<label>
-	   <form className="w-full max-w-lg m-auto py-10 mt-10 px-10 border bg-gray-100" onSubmit={handleSubmit(handleLogin)}>
-		   	<h1 class="font-medium leading-tight text-5xl mt-0 mb-2 text-black-600">Login Form</h1>
-				<div className="container">
-            	<div className="body d-md-flex align-items-center justify-content-between">
-                <div className="box-1 mt-md-0 mt-5"> </div>
-                <div className=" box-2 d-flex flex-column h-100">
-                <div className="text-gray-600 font-medium">
-    <h6 class="font-medium leading-tight text-base mt-0 mb-2 text-blue-600">Username: <input {...register('username', { required: true })} /></h6>
-	       {errors.username && <p style={{ color: "red" }}>* required.</p>}<br/>
-    <h6 class="font-medium leading-tight text-base mt-0 mb-2 text-blue-600">password: <input type="password" {...register('password', { required: true })} /></h6>
-      {errors.password && <p style={{ color: "red" }}>* required.</p>}
-	  
-	 {loading && <div style={{margin:"auto" , width:"40px"}}><CircularProgress/></div>}
-	 {!loading && <input className="mt-4 w-full bg-green-400 hover:bg-green-600 text-green-100 border shadow py-3 px-6 font-semibold text-md rounded" type="submit" />}
-	  <br/><h6 class="leading-tight text-m mt-0 mb-2 text-black-600">No account?</h6><button className="mt-4 w-full bg-orange-400 hover:bg-orange-600 text-green-100 border shadow  py-3 px-6 text-sm rounded" onClick={() => navigate("/register")}>
- 			 Register here
-		</button>
-	  </div></div></div></div>
-      </form>
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const userInfo = { username, password };
+    checkUser(userInfo);
+  };
 
-  </label>
 
-</div>
+  return (
+    <div className="App">
+ 
+        <Container component="main" maxWidth="m" b>
+          <CssBaseline />
+          <Box
+            sx={{
+              marginTop: 8,
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+            }}
+          >
+            <Typography
+              style={{ fontFamily: "Rammetto One" }}
+              component="h1"
+              variant="h5"
+            >
+              Log in
+            </Typography>
+            <Box
+              component="form"
+              onSubmit={handleSubmit}
+              noValidate
+              sx={{ mt: 1 }}
+            >
+              <TextField
+                margin="normal"
+                required
+                fullWidth
+                id="username"
+                label="Username"
+                name="username"
+                autoComplete="username"
+                color="warning"
+                autoFocus
+                onChange={(event) => setUsername(event.target.value)}
+              />
+              <TextField
+                margin="normal"
+                required
+                fullWidth
+                name="password"
+                label="Password"
+                type="password"
+                id="password"
+                autoComplete="current-password"
+                color="warning"
+                onChange={(event) => setPassword(event.target.value)}
+              />
+ {loading && <div style={{margin:"auto" , width:"40px"}}><CircularProgress/></div>}
+	 {!loading && 
+              <Button
+                type="submit"
+                fullWidth
+                variant="contained"
+                sx={{ mt: 3, mb: 2 }}
+                style={{ backgroundColor: "#088F8F", color: "white" }}
+              >
+                Sign In
+              </Button>}
+              <Grid container>
+                <Grid item xs>
+                  <Link
+                    style={{ color: "#088F8F" }}
+                    href="/register"
+                    variant="body2"
+                  >
+                    {"Don't have an account? Sign Up"}
+                  </Link>
+                </Grid>
+                <Grid item>
+        
+                </Grid>
+              </Grid>
+            </Box>
+          </Box>
+        </Container>
+    </div>
+  );
 }

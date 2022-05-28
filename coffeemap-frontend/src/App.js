@@ -10,13 +10,36 @@ import AddReview from './components/AddReview';
 import AddNewCafe from './components/AddNewCafe';
 import Profile from './components/Profile'
 import NavBar2 from './components/Navbar2'
+import {useState} from 'react'
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+import Button from "@mui/material/Button";
+import Reviews from './components/Review'
 import './App.css'
 
+
 function App() {
+
+	  const [light, setLight] = useState(true);
+
+const themeLight = createTheme({
+  palette: {
+    background: {
+      default: "#e4f0e2"
+    }
+  }
+});
+
+const themeDark = createTheme({
+  palette: {
+    mode: 'dark',
+  },
+});
 	return (
 		<>		
 		
 		<BrowserRouter>
+		<ThemeProvider theme={light ? themeLight : themeDark}>
+    <Button onClick={() => setLight((prev) => !prev)}>Toggle Theme</Button>
 		<NavBar2 />
 			<Routes>
 				<Route path="/" element={<Main />} />
@@ -28,12 +51,12 @@ function App() {
 				<Route path="/add" element={<AddNewCafe />} />
 				<Route path="/review" element={<AddReview	 />} />
 				<Route path="/profile" element={<Profile	 />} />
-
+				<Route path="/reviews" element={<Reviews	 />} />
 
 			</Routes>
 
 					<Footer />
-
+</ThemeProvider>>
 		</BrowserRouter>
 		</>
 
