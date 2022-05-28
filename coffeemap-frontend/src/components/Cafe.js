@@ -11,6 +11,8 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import CircularProgress from '@mui/material/CircularProgress';
+import Grid from "@mui/material/Grid";
+
 
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -73,12 +75,12 @@ export default function Cafe () {
         }}
 
 return <div className="center"> 
-
-
+<input type="text" id="myInput" onChange={filterFunction} placeholder="Search.." title="Type in a name"></input>
 {loading && <div style={{margin:"auto" , width:"40px"}}><CircularProgress/></div>}
 	 {!loading && 
    <div className="table">
-        <input type="text" id="myInput" onChange={filterFunction} placeholder="Search for names.." title="Type in a name"></input>
+   
+        
         <TableContainer align="center" component={Paper}>
             <Table sx={{ maxWidth: 700 }} aria-label="customized table">
               {" "}
@@ -113,7 +115,6 @@ return <div className="center">
               </TableBody>
             </Table>
           </TableContainer>  </div>}
-         
-       
+    <a  style={{backgroundColor: "orange" ,color: "black", fontFamily: "Rammetto One", fontSize: "20px"}}href="/add">add new cafes</a>
 </div>
 }
