@@ -1,21 +1,12 @@
-import React from "react";
+import { useState, useEffect } from "react";
 import GoogleMap from 'google-map-react';
 import { Wrapper, Status } from "@googlemaps/react-wrapper";
 import PropTypes from 'prop-types';
-
+import axios from 'axios'
+  
 const AnyReactComponent = ({ text }) => <div>{text}</div>;
 
-export default function SimpleMap(){
-  const defaultProps = {
-    center: {
-      lat: 1.27714,
-      lng: 103.84004
-    },
-    zoom: 15
-    
-  };
-
-  function createMapOptions(maps) {
+function createMapOptions(maps) {
   // next props are exposed at maps
   // "Animation", "ControlPosition", "MapTypeControlStyle", "MapTypeId",
   // "NavigationControlStyle", "ScaleControlStyle", "StrokePosition", "SymbolPath", "ZoomControlStyle",
@@ -33,7 +24,30 @@ export default function SimpleMap(){
     mapTypeControl: true
   };
 }
+ 
+export default function AddMap () {
+
+  const defaultProps = {
+    center: {
+      lat: 1.3617436588555163,
+      lng: 103.84419714056234
+    },
+    zoom: 12
     
+  };
+    
+    const [cafes, setCafes] = useState([]);
+
+ useEffect(() => {
+            axios.get('/api/cafes', {
+                withCredentials: true
+            })
+            .then((res) => {
+                setCafes(res.data.cafes)
+                console.log(res.data.cafes)
+            })
+            .catch((error) => console.log(error));
+    }, [])
 
   return (
     // Important! Always set the container height explicitly
@@ -43,8 +57,14 @@ export default function SimpleMap(){
         defaultCenter={defaultProps.center}
         defaultZoom={defaultProps.zoom}
         options={createMapOptions}>
-        
-         <AnyReactComponent
+       {cafes.map((cafes) => {
+                 <AnyReactComponent
+                  lat={cafes.latitude}
+          lng={cafes.longtitude}
+          text= {cafes.cafename}/>
+       })}
+
+         {/* <AnyReactComponent
           lat={1.27714}
           lng={103.83004}
           text="☕ Nylon Coffee"
@@ -67,8 +87,18 @@ export default function SimpleMap(){
            <AnyReactComponent
           lat={1.2862391217210336}
           lng={103.8034560399344}
+          text="☕ Rookie's Coffee Shop"
+        />
+         <AnyReactComponent
+          lat={1.2862391217210336}
+          lng={103.8034560399344}
           text="☕ Rookie's Coffee Shop "
         />
+         <AnyReactComponent
+          lat={1.3117891894090998}
+          lng={103.86041602828344}
+          text="☕ Chye Seng Huat Hardware"
+        /> */}
       </GoogleMap>
     </div>
   );

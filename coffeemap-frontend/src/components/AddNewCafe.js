@@ -55,7 +55,9 @@ export default function AddNewCafe() {
       {errors.offday && <p style={{ color: "red" }}>* required.</p>}
 	  <h6 class="font-medium leading-tight text-base mt-0 mb-2 text-blue-600">neighbourhood: <input style={{color:"black"}}{...register('neighbourhood', { required: true })} /></h6>
       {errors.neighbourhood && <p style={{ color: "red" }}>* required.</p>}
-	  <h6 class="font-medium leading-tight text-base mt-0 mb-2 text-blue-600">pin: <input style={{color:"black"}}{...register('longtitude', { required: true })} /></h6>
+	  <h6 class="font-medium leading-tight text-base mt-0 mb-2 text-blue-600">longtitude: <input style={{color:"black"}}{...register('longtitude', { required: true })} /></h6>
+      {errors.longtitude && <p style={{ color: "red" }}>* required.</p>}
+	   <h6 class="font-medium leading-tight text-base mt-0 mb-2 text-blue-600">latitude: <input style={{color:"black"}}{...register('latitude', { required: true })} /></h6>
       {errors.longtitude && <p style={{ color: "red" }}>* required.</p>}
 	  {loading && <div style={{margin:"auto" , width:"40px"}}><CircularProgress/></div>}
 	 {!loading && <input className="mt-4 w-full bg-green-400 hover:bg-green-600 text-green-100 border shadow py-3 px-6 font-semibold text-md rounded" type="submit" />}
