@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import GoogleMap from 'google-map-react';
+import GoogleMapReact from 'google-map-react';
 import { Wrapper, Status } from "@googlemaps/react-wrapper";
 import PropTypes from 'prop-types';
 import axios from 'axios'
@@ -65,8 +65,8 @@ export default function AddMap () {
                     </section>{" "}   
                   </div>
                 ))}
-      <GoogleMap
-        apikey={{ key: process.env.REACT_APP_GOOGLE_MAP_API_KEY }}
+      <GoogleMapReact
+        bootstrapURLKeys={{ key: process.env.REACT_APP_GOOGLE_MAP_API_KEY }}
         defaultCenter={defaultProps.center}
         defaultZoom={defaultProps.zoom}
         options={createMapOptions}>
@@ -112,7 +112,7 @@ export default function AddMap () {
           lng={103.86041602828344}
           text="☕ Chye Seng Huat Hardware"
         />
-      </GoogleMap>
+      </GoogleMapReact>
     </div>
   );
 }
