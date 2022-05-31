@@ -64,7 +64,7 @@ export default function AddMap () {
           text= {cafes.cafename}/>
        })}
 
-         {/* <AnyReactComponent
+         <AnyReactComponent
           lat={1.27714}
           lng={103.83004}
           text="☕ Nylon Coffee"
@@ -98,7 +98,7 @@ export default function AddMap () {
           lat={1.3117891894090998}
           lng={103.86041602828344}
           text="☕ Chye Seng Huat Hardware"
-        /> */}
+        />
       </GoogleMap>
     </div>
   );
