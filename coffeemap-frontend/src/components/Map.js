@@ -1,17 +1,19 @@
 import React from "react";
+import React, {PropTypes, Component} from 'react/addons';
 import GoogleMapReact from 'google-map-react';
-import { Wrapper, Status } from "@googlemaps/react-wrapper";
 import PropTypes from 'prop-types';
+import shouldPureComponentUpdate from 'react-pure-render/function';
+import MyGreatPlace from './my_great_place';
 
 const AnyReactComponent = ({ text }) => <div>{text}</div>;
 
 export default function SimpleMap(){
   const defaultProps = {
     center: {
-      lat: 1.27709,
-      lng: 103.851959
+      lat: 1.27714,
+      lng: 103.84004
     },
-    zoom: 20
+    zoom: 15
     
   };
 
@@ -43,12 +45,13 @@ export default function SimpleMap(){
         defaultCenter={defaultProps.center}
         defaultZoom={defaultProps.zoom}
         options={createMapOptions}>
-        
+          <MyGreatPlace lat={1.27714} lng={103.83004} text={'A'} />
+{/*           
          <AnyReactComponent
-          lat={1.27709}
-          lng={103.851959}
-          text="☕ Nylon"
-        />
+          lat={1.27714}
+          lng={103.83004}
+          text="☕ Nylon Coffee"
+        /> */}
         <AnyReactComponent
           lat={1.3128331674021738}
           lng={103.86110632643916}
