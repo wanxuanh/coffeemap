@@ -72,8 +72,8 @@ export default function AddMap () {
        })}
 
          <AnyReactComponent
-          lat={cafe[0].latitude}
-          lng={cafe[0].longtitude}
+          lat={cafes[0].latitude}
+          lng={cafes[0].longtitude}
           text="☕ Nylon Coffee"
         />
         {/* <AnyReactComponent
