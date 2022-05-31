@@ -1,21 +1,11 @@
 import React from "react";
-import React, {PropTypes, Component} from 'react/addons';
+import {PropTypes, Component} from 'react/addons';
 import GoogleMapReact from 'google-map-react';
-import PropTypes from 'prop-types';
 import shouldPureComponentUpdate from 'react-pure-render/function';
 import MyGreatPlace from './my_great_place';
 
 const AnyReactComponent = ({ text }) => <div>{text}</div>;
 
-export default function SimpleMap(){
-  const defaultProps = {
-    center: {
-      lat: 1.27714,
-      lng: 103.84004
-    },
-    zoom: 15
-    
-  };
 
   function createMapOptions(maps) {
   // next props are exposed at maps
@@ -35,13 +25,25 @@ export default function SimpleMap(){
     mapTypeControl: true
   };
 }
+
+export default function SimpleMap(){
+  const defaultProps = {
+    center: {
+      lat: 1.27714,
+      lng: 103.84004
+    },
+    zoom: 15
+    
+  };
+
+  shouldComponentUpdate = shouldPureComponentUpdate;
     
 
   return (
     // Important! Always set the container height explicitly
     <div style={{ height: '100vh', width: '100%' }}>
       <GoogleMapReact
-        bootstrapURLKeys={{ key: process.env.REACT_APP_GOOGLE_MAP_API_KEY }}
+        apiKey={{ key: process.env.REACT_APP_GOOGLE_MAP_API_KEY }}
         defaultCenter={defaultProps.center}
         defaultZoom={defaultProps.zoom}
         options={createMapOptions}>
