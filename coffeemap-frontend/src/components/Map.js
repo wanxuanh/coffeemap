@@ -53,18 +53,10 @@ export default function AddMap () {
     // Important! Always set the container height explicitly
     <div style={{ height: '100vh', width: '100%' }}>
        {cafes.map((cafes) => (
-                  <div key={cafes.cafename} style={{display: `${cafes.display}`}}>
+                  <div key={cafes.cafename} style={{display: `${cafes.display}`, width:'20%'}}>
                     <section>
                         {cafes.cafename}
-                    </section>{" "}
-                    <section>
-                        {cafes.longtitude}
-                    </section>{" "}
-                    <section>{cafes.offday}</section>{" "}
-                     <section>
-                        {cafes.latitude}
-                    </section>{" "}
-                    
+                    </section>{" "}      
                   </div>
                 ))}
       <GoogleMap
@@ -79,10 +71,9 @@ export default function AddMap () {
           text= {cafes.cafename}/>
        })}
 
-
          <AnyReactComponent
-          lat={1.27714}
-          lng={103.83004}
+          lat={cafe[0].latitude}
+          lng={cafe[0].longtitude}
           text="☕ Nylon Coffee"
         />
         {/* <AnyReactComponent

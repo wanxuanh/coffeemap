@@ -51,7 +51,6 @@ export default function Cafe () {
             })
             .then((res) => {
                 setCafes(res.data.cafes);
-                 console.log(res.data.cafes)
                 setLoading(false);
 
             })
