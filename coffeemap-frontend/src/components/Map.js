@@ -71,9 +71,9 @@ export default function AddMap () {
         defaultZoom={defaultProps.zoom}
         options={createMapOptions}>
        {cafes.map((cafes) => {
-                 <AnyReactComponent key={cafes.cafename}
-                  lat={cafes.latitude}
-          lng={cafes.longtitude}
+          <AnyReactComponent key={cafes.cafename}
+          lat={Number(cafes.latitude)}
+          lng={Number(cafes.longtitude)}
           text= {cafes.cafename}/>
        })}
 
