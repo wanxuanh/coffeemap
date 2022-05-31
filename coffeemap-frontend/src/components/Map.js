@@ -2,17 +2,18 @@ import React from "react";
 import GoogleMapReact from 'google-map-react';
 import { Wrapper, Status } from "@googlemaps/react-wrapper";
 import PropTypes from 'prop-types';
+import { RedoSharp } from "@material-ui/icons";
 
 
-const AnyReactComponent = ({ text }) => <div>{text}</div>;
+const AnyReactComponent = ({ text }) => <div style={{background:black, font:red}}>{text}</div>;
 
 export default function SimpleMap(){
   const defaultProps = {
     center: {
-      lat: 1.27709,
-      lng: 103.851959
+      lat: 1.3128331674021738,
+      lng: 103.86110632643916
     },
-    zoom: 13
+    zoom: 15
   };
 
   return (
