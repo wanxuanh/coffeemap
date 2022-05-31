@@ -58,7 +58,7 @@ export default function AddMap () {
                         {cafes.cafename}
                     </section>{" "}      
                       <section>
-                        {Number(cafes.latitude)}
+                        {typeof (cafes.latitude)}
                     </section>{" "}   
                      <section>
                         {Number(cafes.longtitude)}
@@ -73,14 +73,15 @@ export default function AddMap () {
         >
        {cafes.map((cafes) => {
           <AnyReactComponent key={cafes.cafename}
-          lat={Number(cafes.longtitude)}
-          lng={Number(cafes.latitude)}
+          lat={Number(cafes.latitude)}
+          lng={Number(cafes.longtitude)}
           text= {cafes.cafename}/>
        })}
+       <Marker position={{ lat: 103.84000643993434, lng: 1.2770883748377164 }}></Marker>
 
          <AnyReactComponent
-          lat={103.84000643993434}
-          lng={1.2770883748377164}
+          lat={1.2770883748377164}
+          lng={103.84000643993434}
           text="☕ Nylon Coffee"
         /> 
         <AnyReactComponent
