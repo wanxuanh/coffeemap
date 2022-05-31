@@ -29,36 +29,14 @@ export default function SimpleMap(){
         bootstrapURLKeys={{ key: process.env.REACT_APP_GOOGLE_MAP_API_KEY }}
         defaultCenter={defaultProps.center}
         defaultZoom={defaultProps.zoom}
-        options={createMapOptions}>
-        <MyGreatPlace lat={1.27709} lng={103.851959} text={'A'} />
-    
+      >
         <AnyReactComponent
           lat={1.27709}
           lng={103.851959}
-          text="☕ Nylon Coffee"
-        />
-        <AnyReactComponent
-          lat={1.3128331674021738}
-          lng={103.86110632643916}
-          text="☕ Apartment Coffee"
-        />
-          <AnyReactComponent
-          lat={1.3656806822389873}
-          lng={103.86987143511345}
-          text="☕ Chu and Co"
-        />
-         <AnyReactComponent
-          lat={1.3119747944499036}
-          lng={103.79685794417453}
-          text="☕ Sunday Folks"
-        />
-           <AnyReactComponent
-          lat={1.2862391217210336}
-          lng={103.8034560399344}
-          text="☕ Rookie's Coffee Shop "
-        />
-       
+          text="☕ Nylon"
+          
 
+        />
       </GoogleMapReact>
     </div>
   );
