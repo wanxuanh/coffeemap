@@ -12,7 +12,7 @@ export default function SimpleMap(){
       lat: 1.27709,
       lng: 103.851959
     },
-    zoom: 50
+    zoom: 15
   };
 
   return (
