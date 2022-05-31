@@ -36,36 +36,28 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 
    
 
-export default function Cafe () {
+export default function Review () {
 
      
         const [searchInput, setSearchInput] = useState("")
         const [loading, setLoading] = useState(false)
         const [reviews, setReviews] = useState([]);
-        const [cafes, setCafes] = useState([])
 
 
         useEffect(() => {
-        
+                setLoading(true)
+              setTimeout(() => {
             axios.get('/api/reviews', {
                 withCredentials: true
             })
             .then((res) => {
                 setReviews(res.data.reviews)
+                setLoading(false);
 
             })
             .catch((error) => console.log(error));
 
-            axios.get('/api/cafes', {
-                withCredentials: true
-            })
-            .then((res) => {
-                setCafes(res.data.cafes)
-
-            })
-            
-            .catch((error) => console.log(error));
-          }, [])
+           },500)}, [])
 
       const filterFunction = () => {
         let input, filter, tr, td, i;
@@ -74,7 +66,7 @@ export default function Cafe () {
         setSearchInput(filter)
         tr = reviews;
         for (i = 0; i < tr.length; i++) {
-            td = tr[i].comments+" "+tr[i].USP+" "+tr[i].drinkName;
+            td = tr[i].cafes.cafename+" " +tr[i].comments+" "+tr[i].USP+" "+tr[i].drinkName;
             if (td) {
             if (td.toUpperCase().indexOf(filter) > -1) {
               tr[i].display=""
@@ -85,14 +77,13 @@ export default function Cafe () {
         }}
 
 return <div className="center"> 
-
   <input type="text" id="myInput" onChange={filterFunction} placeholder="Search for names.." title="Type in a name"></input>
 
 {loading && <div style={{margin:"auto" , width:"40px"}}><CircularProgress/></div>}
 	 {!loading && 
    
    <div className="table">
-     
+    
         <TableContainer align="center" component={Paper}>
             <Table sx={{ maxWidth: 700 }} aria-label="customized table">
               {" "}
@@ -114,7 +105,8 @@ return <div className="center">
                   <TableRow key={reviews.comments} style={{display: `${reviews.display}`}}>
                     
                        <TableCell>
-                       
+                     
+                    {reviews.cafes.cafename}
                        
                     
                     </TableCell>{" "}<TableCell>
@@ -138,10 +130,9 @@ return <div className="center">
                 ))}
               </TableBody>
             </Table>
-          </TableContainer>  </div>}
+          </TableContainer>  </div> }
       <a  style={{backgroundColor: "orange" ,color: "black", fontFamily: "Rammetto One", fontSize: "20px"}}href="/review">share your reviews</a>
-
-         
-       
+   
+               
 </div>
 }

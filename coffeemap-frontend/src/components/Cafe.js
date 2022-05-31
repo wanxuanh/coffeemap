@@ -74,7 +74,7 @@ export default function Cafe () {
             }       
         }}
 
-return <div className="center"> 
+return <div className="center" style={{ height: '80vh', width: '100%' }}>
 <input type="text" id="myInput" onChange={filterFunction} placeholder="Search.." title="Type in a name"></input>
 {loading && <div style={{margin:"auto" , width:"40px"}}><CircularProgress/></div>}
 	 {!loading && 

@@ -15,6 +15,7 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import Button from "@mui/material/Button";
 import Reviews from './components/Review'
 import Logout from './components/Logout'
+import RequireAuth from './components/RequireAuth';
 import './App.css'
 
 
@@ -39,8 +40,6 @@ const themeDark = createTheme({
 		<>		
 		
 		<BrowserRouter>
-		<ThemeProvider theme={light ? themeLight : themeDark}>
-    <Button onClick={() => setLight((prev) => !prev)}>Toggle Theme</Button>
 		<NavBar2 />
 			<Routes>
 				<Route path="/" element={<Main />} />
@@ -48,18 +47,18 @@ const themeDark = createTheme({
 				<Route path="/login" element={<Login />} />
 				<Route path="/map" element={<Map />} />
 				<Route path="/register" element={<Register />} />
+				<Route path="/reviews" element={<Reviews	 />} />
 				{/* Protected route */}
+				<Route element={<RequireAuth />}>
 				<Route path="/add" element={<AddNewCafe />} />
 				<Route path="/review" element={<AddReview	 />} />
 				<Route path="/profile" element={<Profile	 />} />
-				<Route path="/reviews" element={<Reviews	 />} />
-
+				</Route>
 				<Route path="/logout" element={<Logout	 />} />
 
 			</Routes>
 
 					<Footer />
-</ThemeProvider>
 		</BrowserRouter>
 		</>
 

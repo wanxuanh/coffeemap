@@ -31,6 +31,7 @@ const navigate = useNavigate();
 
             })
             .catch((error) => console.log(error));
+            return;
     }, [])
 
     const onChange =  (data, e) => {

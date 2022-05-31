@@ -33,7 +33,7 @@ export default function AddNewCafe() {
 			
 			.then((res) => console.log(res))
 			.then(setLoading(false))
-			navigate("/cafe")
+			navigate("/add")
 			},1000)
 			
 		

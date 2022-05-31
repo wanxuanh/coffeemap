@@ -168,7 +168,7 @@ app.post('/api/cafes', async (req, res) => {
 
 app.get('/api/reviews', async (req, res) => {
 	const reviews = await prisma.reviews.findMany({
-		include: { users: true }
+		include: { users: true, cafes: true }
 	});
 	res.json({ reviews });
 });
