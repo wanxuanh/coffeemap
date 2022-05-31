@@ -50,10 +50,12 @@ export default function Cafe () {
                 withCredentials: true
             })
             .then((res) => {
-                setCafes(res.data.cafes)
+                setCafes(res.data.cafes);
+                 console.log(res.data.cafes)
                 setLoading(false);
 
             })
+          
             .catch((error) => console.log(error));
     },500)}, [])
 
