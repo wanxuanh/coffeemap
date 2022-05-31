@@ -57,6 +57,12 @@ export default function AddMap () {
                     <section>
                         {cafes.cafename}
                     </section>{" "}      
+                      <section>
+                        {cafes.latitude}
+                    </section>{" "}   
+                     <section>
+                        {cafes.longtitude}
+                    </section>{" "}   
                   </div>
                 ))}
       <GoogleMap
@@ -64,12 +70,12 @@ export default function AddMap () {
         defaultCenter={defaultProps.center}
         defaultZoom={defaultProps.zoom}
         options={createMapOptions}>
-       {/* {cafes.map((cafes) => {
+       {cafes.map((cafes) => {
                  <AnyReactComponent key={cafes.cafename}
                   lat={cafes.latitude}
           lng={cafes.longtitude}
           text= {cafes.cafename}/>
-       })} */}
+       })}
 
          {/* <AnyReactComponent
           lat={cafes[0].latitude}
