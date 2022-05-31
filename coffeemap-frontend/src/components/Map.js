@@ -57,12 +57,6 @@ export default function AddMap () {
                     <section>
                         {cafes.cafename}
                     </section>{" "}      
-                      <section>
-                        {typeof (cafes.latitude)}
-                    </section>{" "}   
-                     <section>
-                        {Number(cafes.longtitude)}
-                    </section>{" "}   
                   </div>
                 ))}
       <GoogleMapReact
@@ -72,12 +66,11 @@ export default function AddMap () {
         // options={createMapOptions}
         >
        {cafes.map((cafes) => {
-          <AnyReactComponent key={cafes.cafename}
-          lat={Number(cafes.latitude)}
-          lng={Number(cafes.longtitude)}
+          <AnyReactComponent
+          lat={Number(cafes.longtitude)}
+          lng={Number(cafes.latitude)}
           text= {cafes.cafename}/>
        })}
-       <Marker position={{ lat: 103.84000643993434, lng: 1.2770883748377164 }}></Marker>
 
          <AnyReactComponent
           lat={1.2770883748377164}
@@ -105,8 +98,8 @@ export default function AddMap () {
           text="☕ Rookie's Coffee Shop"
         />
          <AnyReactComponent
-          lat={103.83920364001963}
-          lng={1.2776939009509887}
+          lat={1.2776939009509887}
+          lng={103.83920364001963}
           text="☕ Handcraft Coffee "
         />
          <AnyReactComponent
@@ -115,8 +108,8 @@ export default function AddMap () {
           text="☕ Chye Seng Huat Hardware"
         />
         <AnyReactComponent
-          lat={103.90471672643913}
-          lng={1.3066306981197964}
+          lat={1.3066306981197964}
+          lng={103.90471672643913}
           text="☕ Homeground Coffee Roasters"
         />
         {/* <AnyReactComponent
