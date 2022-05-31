@@ -64,23 +64,23 @@ export default function AddMap () {
         defaultCenter={defaultProps.center}
         defaultZoom={defaultProps.zoom}
         options={createMapOptions}>
-       {cafes.map((cafes) => {
+       {/* {cafes.map((cafes) => {
                  <AnyReactComponent key={cafes.cafename}
                   lat={cafes.latitude}
           lng={cafes.longtitude}
           text= {cafes.cafename}/>
-       })}
+       })} */}
 
-         <AnyReactComponent
+         {/* <AnyReactComponent
           lat={cafes[0].latitude}
           lng={cafes[0].longtitude}
           text="☕ Nylon Coffee"
-        />
-        {/* <AnyReactComponent
+        /> */}
+        {/* {/* <AnyReactComponent
           lat={1.3128331674021738}
           lng={103.86110632643916}
           text="☕ Apartment Coffee"
-        />
+        /> */}
           <AnyReactComponent
           lat={1.3656806822389873}
           lng={103.86987143511345}
@@ -105,7 +105,7 @@ export default function AddMap () {
           lat={1.3117891894090998}
           lng={103.86041602828344}
           text="☕ Chye Seng Huat Hardware"
-        /> */}
+        />
       </GoogleMap>
     </div>
   );
