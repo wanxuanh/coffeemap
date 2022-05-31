@@ -16,6 +16,7 @@ import Button from "@mui/material/Button";
 import Reviews from './components/Review'
 import Logout from './components/Logout'
 import RequireAuth from './components/RequireAuth';
+import MapWithMarker from './components/MapWithMarker';
 import './App.css'
 
 
@@ -45,7 +46,7 @@ const themeDark = createTheme({
 				<Route path="/" element={<Main />} />
 				<Route path="/cafe" element={<Cafe />} />
 				<Route path="/login" element={<Login />} />
-				<Route path="/map" element={<Map />} />
+				<Route path="/map" element={<MapWithMarker />} />
 				<Route path="/register" element={<Register />} />
 				<Route path="/reviews" element={<Reviews	 />} />
 				{/* Protected route */}
