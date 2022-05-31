@@ -58,10 +58,10 @@ export default function AddMap () {
                         {cafes.cafename}
                     </section>{" "}      
                       <section>
-                        {cafes.latitude}
+                        {Number(cafes.latitude)}
                     </section>{" "}   
                      <section>
-                        {cafes.longtitude}
+                        {Number(cafes.longtitude)}
                     </section>{" "}   
                   </div>
                 ))}
@@ -69,7 +69,8 @@ export default function AddMap () {
         bootstrapURLKeys={{ key: process.env.REACT_APP_GOOGLE_MAP_API_KEY }}
         defaultCenter={defaultProps.center}
         defaultZoom={defaultProps.zoom}
-        options={createMapOptions}>
+        // options={createMapOptions}
+        >
        {cafes.map((cafes) => {
           <AnyReactComponent key={cafes.cafename}
           lat={Number(cafes.latitude)}
@@ -87,7 +88,7 @@ export default function AddMap () {
           lng={103.86110632643916}
           text="☕ Apartment Coffee"
         /> */}
-          <AnyReactComponent
+        <AnyReactComponent
           lat={1.3656806822389873}
           lng={103.86987143511345}
           text="☕ Chu and Co"
