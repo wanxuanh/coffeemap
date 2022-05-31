@@ -58,10 +58,10 @@ export default function AddMap () {
                         {cafes.cafename}
                     </section>{" "}      
                       <section>
-                        {Number(cafes.latitude)}
+                        {parseInt(cafes.latitude)}
                     </section>{" "}   
                      <section>
-                        {Number(cafes.longtitude)}
+                        {parseInt(cafes.longtitude)}
                     </section>{" "}   
                   </div>
                 ))}
@@ -71,48 +71,15 @@ export default function AddMap () {
         defaultZoom={defaultProps.zoom}
         // options={createMapOptions}
         >
+        
        {cafes.map((cafes) => {
-          <AnyReactComponent key={cafes.cafename}
-          lat={Number(cafes.latitude)}
-          lng={Number(cafes.longtitude)}
+          <AnyReactComponent
+          lat={parseInt(cafes.latitude)}
+          lng={parseInt(cafes.longtitude)}
           text= {cafes.cafename}/>
        })}
 
-         {/* <AnyReactComponent
-          lat={cafes[0].latitude}
-          lng={cafes[0].longtitude}
-          text="☕ Nylon Coffee"
-        /> */}
-        {/* {/* <AnyReactComponent
-          lat={1.3128331674021738}
-          lng={103.86110632643916}
-          text="☕ Apartment Coffee"
-        /> */}
-        <AnyReactComponent
-          lat={1.3656806822389873}
-          lng={103.86987143511345}
-          text="☕ Chu and Co"
-        />
-         <AnyReactComponent
-          lat={1.3119747944499036}
-          lng={103.79685794417453}
-          text="☕ Sunday Folks"
-        />
-           <AnyReactComponent
-          lat={1.2862391217210336}
-          lng={103.8034560399344}
-          text="☕ Rookie's Coffee Shop"
-        />
-         <AnyReactComponent
-          lat={1.2862391217210336}
-          lng={103.8034560399344}
-          text="☕ Rookie's Coffee Shop "
-        />
-         <AnyReactComponent
-          lat={1.3117891894090998}
-          lng={103.86041602828344}
-          text="☕ Chye Seng Huat Hardware"
-        />
+      <MapMarker></MapMarker>
       </GoogleMapReact>
     </div>
   );
