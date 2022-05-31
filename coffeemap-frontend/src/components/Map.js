@@ -58,10 +58,10 @@ export default function AddMap () {
                         {cafes.cafename}
                     </section>{" "}      
                       <section>
-                        {parseInt(cafes.latitude)}
+                        {Number(cafes.latitude)}
                     </section>{" "}   
                      <section>
-                        {parseInt(cafes.longtitude)}
+                        {Number(cafes.longtitude)}
                     </section>{" "}   
                   </div>
                 ))}
@@ -71,15 +71,83 @@ export default function AddMap () {
         defaultZoom={defaultProps.zoom}
         // options={createMapOptions}
         >
-        
        {cafes.map((cafes) => {
-          <AnyReactComponent
-          lat={parseInt(cafes.latitude)}
-          lng={parseInt(cafes.longtitude)}
+          <AnyReactComponent key={cafes.cafename}
+          lat={Number(cafes.longtitude)}
+          lng={Number(cafes.latitude)}
           text= {cafes.cafename}/>
        })}
 
-      <MapMarker></MapMarker>
+         <AnyReactComponent
+          lat={103.84000643993434}
+          lng={1.2770883748377164}
+          text="☕ Nylon Coffee"
+        /> 
+        <AnyReactComponent
+          lat={1.3128331674021738}
+          lng={103.86110632643916}
+          text="☕ Apartment Coffee"
+        />
+        <AnyReactComponent
+          lat={1.3656806822389873}
+          lng={103.86987143511345}
+          text="☕ Chu and Co"
+        />
+         <AnyReactComponent
+          lat={1.3119747944499036}
+          lng={103.79685794417453}
+          text="☕ Sunday Folks"
+        />
+           <AnyReactComponent
+          lat={1.2862391217210336}
+          lng={103.8034560399344}
+          text="☕ Rookie's Coffee Shop"
+        />
+         <AnyReactComponent
+          lat={103.83920364001963}
+          lng={1.2776939009509887}
+          text="☕ Handcraft Coffee "
+        />
+         <AnyReactComponent
+          lat={1.3117891894090998}
+          lng={103.86041602828344}
+          text="☕ Chye Seng Huat Hardware"
+        />
+        <AnyReactComponent
+          lat={103.90471672643913}
+          lng={1.3066306981197964}
+          text="☕ Homeground Coffee Roasters"
+        />
+        {/* <AnyReactComponent
+          lat={1.3117891894090998}
+          lng={103.86041602828344}
+          text="☕ Chye Seng Huat Hardware"
+        />
+        <AnyReactComponent
+          lat={1.3117891894090998}
+          lng={103.86041602828344}
+          text="☕ Chye Seng Huat Hardware"
+        />
+        <AnyReactComponent
+          lat={1.3117891894090998}
+          lng={103.86041602828344}
+          text="☕ Chye Seng Huat Hardware"
+        />
+        <AnyReactComponent
+          lat={1.3117891894090998}
+          lng={103.86041602828344}
+          text="☕ Chye Seng Huat Hardware"
+        />
+        <AnyReactComponent
+          lat={1.3117891894090998}
+          lng={103.86041602828344}
+          text="☕ Chye Seng Huat Hardware"
+        />
+        <AnyReactComponent
+          lat={1.3117891894090998}
+          lng={103.86041602828344}
+          text="☕ Chye Seng Huat Hardware"
+        /> */}
       </GoogleMapReact>
     </div>
   );
