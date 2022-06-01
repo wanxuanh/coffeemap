@@ -75,7 +75,10 @@ export default function Cafe () {
             }       
         }}
 
-return <div className="center" style={{ height: '80vh', width: '100%' }}>
+return <div className="App" style={{ height: '80vh', width: '100%' }}>
+
+  <section></section>
+      <a  style={{backgroundColor: "orange" ,color: "black", fontFamily: "Rammetto One", fontSize: "20px"}}href="/add">add new cafes</a>
 <input type="text" id="myInput" onChange={filterFunction} placeholder="Search.." title="Type in a name"></input>
 {loading && <div style={{margin:"auto" , width:"40px"}}><CircularProgress/></div>}
 	 {!loading && 
@@ -103,7 +106,6 @@ return <div className="center" style={{ height: '80vh', width: '100%' }}>
                        </Link> 
                     </TableCell>{" "}
                     <TableCell>
-                      {/* <Link to={`/price?stock=${item.symbol}`}> */}
                         {cafes.address}
                     </TableCell>{" "}
                     <TableCell>{cafes.offday}</TableCell>{" "}
@@ -116,6 +118,5 @@ return <div className="center" style={{ height: '80vh', width: '100%' }}>
               </TableBody>
             </Table>
           </TableContainer>  </div>}
-    <a  style={{backgroundColor: "orange" ,color: "black", fontFamily: "Rammetto One", fontSize: "20px"}}href="/add">add new cafes</a>
 </div>
 }

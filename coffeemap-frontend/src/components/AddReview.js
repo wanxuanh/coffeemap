@@ -1,9 +1,10 @@
 
 import {useForm} from 'react-hook-form'
-import { useState } from "react";
-
+import { useState, useEffect } from "react";
+import axios from 'axios'
 import CircularProgress from '@mui/material/CircularProgress';
 import { useNavigate } from 'react-router-dom';
+import {Autocomplete, TextField} from '@mui/material'
 
 export default function AddReview() {
 
@@ -16,8 +17,24 @@ export default function AddReview() {
       let navigate = useNavigate();
 
   const [loading, setLoading] = useState(false)
+  const [cafes, setCafes] = useState([])
+  const [selectedCafe, setSelectedCafe] = useState()
+
+
+  useEffect(() => {
+      axios.get('/api/cafes', {
+      withCredentials: true
+  })
+  .then((res) => {
+      setCafes(res.data.cafes)
+      console.log(res.data.cafes)
+  })
+  .catch((error) => console.log(error));
+  }, [])
+
 
 	const handleAddNew = (data, e) => {
+    console.log('submit')
       e.preventDefault();
       setLoading(true)
 
@@ -47,7 +64,24 @@ setTimeout(() => {fetch('/api/reviews', {
                 <div className="box-1 mt-md-0 mt-5"> </div>
                 <div className=" box-2 d-flex flex-column h-100">
                 <div className="text-gray-600 font-medium">
-
+<Autocomplete
+        options={cafes}
+        isOptionEqualToValue={(option, value) => option.id === value.id}
+        getOptionLabel={(option) => option.cafename}
+        onChange={(event, cafe) => {setSelectedCafe(cafe, console.log(cafe))}}
+        autoHighlight={true}
+        renderInput={(params) => 
+          <TextField 
+          style={{minWidth: 250}}
+          {...params} 
+          label="Cafe Name" 
+          variant="standard" 
+          required={true} 
+          onChange={(e) => setSelectedCafe({cafename: e.target.value})}
+          />}
+       />
+       <h6 hidden class="font-medium leading-tight text-base mt-0 mb-2 text-blue-600">cafeid: <input value={selectedCafe ? selectedCafe.id : ''} style={{color:"black"}}{...register('cafeid', {required: true })} /></h6>
+      {(selectedCafe != null && selectedCafe.id == null) && <p style={{ color: "red" }}>* required.</p>}
     <h6 class="font-medium leading-tight text-base mt-0 mb-2 text-blue-600">comments: <input style={{color:"black"}}{...register('comments', { required: true })} /></h6>
 	       {errors.comments && <p style={{ color: "red" }}>* required.</p>}
     
@@ -65,8 +99,6 @@ setTimeout(() => {fetch('/api/reviews', {
       {errors.drinkPrice && <p style={{ color: "red" }}>* required.</p>}
       <h6 class="font-medium leading-tight text-base mt-0 mb-2 text-blue-600">originBlend: <input style={{color:"black"}}{...register('originBlend', { required: true })} /></h6>
       {errors.originBlend && <p style={{ color: "red" }}>* required.</p>}  
-       <h6 class="font-medium leading-tight text-base mt-0 mb-2 text-blue-600">cafeid: <input style={{color:"black"}}{...register('cafeid', { required: true })} /></h6>
-      {errors.cafeid && <p style={{ color: "red" }}>* required.</p>}  
 {loading && <div style={{margin:"auto" , width:"40px"}}><CircularProgress/></div>}
 	 {!loading &&	<input className="mt-4 w-full bg-green-400 hover:bg-green-600 text-green-100 border shadow py-3 px-6 font-semibold text-md rounded" type="submit" />}
 

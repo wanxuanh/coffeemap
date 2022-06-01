@@ -77,6 +77,9 @@ export default function Review () {
         }}
 
 return <div className="center"> 
+<div>{" "}</div>
+      <a  style={{backgroundColor: "orange" ,color: "black", fontFamily: "Rammetto One", fontSize: "20px"}}href="/review">share your reviews</a>
+
   <input type="text" id="myInput" onChange={filterFunction} placeholder="Search for names.." title="Type in a name"></input>
 
 {loading && <div style={{margin:"auto" , width:"40px"}}><CircularProgress/></div>}
@@ -130,9 +133,7 @@ return <div className="center">
                 ))}
               </TableBody>
             </Table>
-          </TableContainer>  </div> }
-      <a  style={{backgroundColor: "orange" ,color: "black", fontFamily: "Rammetto One", fontSize: "20px"}}href="/review">share your reviews</a>
-   
+          </TableContainer>  </div> }   
                
 </div>
 }
