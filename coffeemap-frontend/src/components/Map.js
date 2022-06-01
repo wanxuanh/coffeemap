@@ -29,10 +29,10 @@ export default function AddMap () {
 
   const defaultProps = {
     center: {
-      lat: 1.3617436588555163,
-      lng: 103.84419714056234
+      lat: 1.3419337155970208,
+      lng: 103.85414242579256
     },
-    zoom: 12
+    zoom: 13
     
   };
     
@@ -52,13 +52,6 @@ export default function AddMap () {
   return (
     // Important! Always set the container height explicitly
     <div style={{ height: '100vh', width: '100%' }}>
-       {cafes.map((cafes) => (
-                  <div key={cafes.cafename} style={{display: `${cafes.display}`, width:'20%'}}>
-                    <section>
-                        {cafes.cafename}
-                    </section>{" "}      
-                  </div>
-                ))}
       <GoogleMapReact
         bootstrapURLKeys={{ key: process.env.REACT_APP_GOOGLE_MAP_API_KEY }}
         defaultCenter={defaultProps.center}
@@ -143,6 +136,19 @@ export default function AddMap () {
           text="☕ Chye Seng Huat Hardware"
         /> */}
       </GoogleMapReact>
+      {cafes.map((cafes) => (
+                  <div key={cafes.cafename} style={{display: `${cafes.display}`, width:'20%'}}>
+                    <section>
+                        {cafes.cafename}
+                    </section>{" "}  
+                     <section>
+                        {cafes.latitude}
+                    </section>{" "}
+                     <section>
+                        {cafes.longtitude}
+                    </section>{" "}        
+                  </div>
+                ))}
     </div>
   );
 }
