@@ -192,7 +192,6 @@ app.post('/api/reviews', async (req, res) => {
 			drinkName: req.body.drinkName,
 			drinkPrice: req.body.drinkPrice,
 			originBlend: req.body.originBlend,
-			//datetime: datetimeISO,
 			cafeid: parseInt(req.body.cafeid),
 			userid: userId.id
 		}
