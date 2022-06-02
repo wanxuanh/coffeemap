@@ -11,6 +11,7 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import CircularProgress from '@mui/material/CircularProgress';
 import {Link} from 'react-router-dom'
+import Card from './Card';
 
 
 
@@ -84,41 +85,15 @@ return <div className="center">
 
 {loading && <div style={{margin:"auto" , width:"40px"}}><CircularProgress/></div>}
 	 {!loading && 
+   <div>
+     {reviews.map((review) => {
+       return (
+            <Card review={review}/>
+       )
+     })}
+   </div>
    
-   <div className="table">
-    
-        <TableContainer align="center" component={Paper}>
-            <Table sx={{ maxWidth: 700 }} aria-label="customized table">
-              {" "}
-              <TableHead>
-                <StyledTableRow>
-                 <StyledTableCell>Cafe Name </StyledTableCell>
-                  <StyledTableCell>Comments </StyledTableCell>
-                  <StyledTableCell>Must try food</StyledTableCell>
-                   <StyledTableCell>Must try Drink</StyledTableCell>
-                   <StyledTableCell>Price</StyledTableCell>
-                   <StyledTableCell>Reviewed by</StyledTableCell>
-                   
-                   
-                </StyledTableRow>
-              </TableHead>
-              <TableBody>
-
-                {reviews.map((reviews) => (
-                  <TableRow key={reviews.id} style={{display: `${reviews.display}`}}>
-                    
-                       <TableCell> {reviews.cafes.cafename}</TableCell>{" "}
-                       <TableCell> {reviews.comments} </TableCell>{" "}
-                    <TableCell>{reviews.USP}</TableCell>{" "}
-                    <TableCell>{reviews.drinkName}</TableCell>{" "}
-                     <TableCell> {reviews.drinkPrice}</TableCell>{" "}
-                       <TableCell>{reviews.users.name} </TableCell>{" "}
-                    
-                  </TableRow>
-                ))}
-              </TableBody>
-            </Table>
-          </TableContainer>  </div> }   
+    }   
                
 </div>
 }
