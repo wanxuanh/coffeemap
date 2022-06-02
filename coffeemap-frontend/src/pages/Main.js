@@ -1,8 +1,8 @@
-import Login from '../components/Login';
+import Map from '../pages/MapMap';
 
 export default function Main() {
 	return <>
 
-	<Login />
+	<Map />
 	</>
 }
