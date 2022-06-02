@@ -36,6 +36,7 @@ export default function AddReview() {
 	const handleAddNew = (data, e) => {
     console.log('submit')
       e.preventDefault();
+      data.cafeid = selectedCafe.id
       setLoading(true)
 
 setTimeout(() => {fetch('/api/reviews', {
@@ -80,7 +81,7 @@ setTimeout(() => {fetch('/api/reviews', {
           onChange={(e) => setSelectedCafe({cafename: e.target.value})}
           />}
        />
-       <h6 class="font-medium leading-tight text-base mt-0 mb-2 text-blue-600">cafeid: <input value={selectedCafe ? selectedCafe.id : ''} style={{color:"black"}}{...register('cafeid')} /></h6>
+     <h6 hidden class="font-medium leading-tight text-base mt-0 mb-2 text-blue-600">cafeid: <input value={selectedCafe ? selectedCafe.id : ''} style={{color:"black"}}{...register('cafeid')} /></h6>
       {(selectedCafe != null && selectedCafe.id == null) && <p style={{ color: "red" }}>* required.</p>}
     <h6 class="font-medium leading-tight text-base mt-0 mb-2 text-blue-600">comments: <input style={{color:"black"}}{...register('comments', { required: true })} /></h6>
 	       {errors.comments && <p style={{ color: "red" }}>* required.</p>}

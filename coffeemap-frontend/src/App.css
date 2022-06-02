@@ -10,6 +10,14 @@ body {
   background-size: cover;
 }
 
+.App2 {
+  background: url("./images/cuppa.jpg") no-repeat;
+  height: 1000px;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+
 .input{
   display:block;
   margin-right: auto;

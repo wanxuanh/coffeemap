@@ -39,7 +39,7 @@ export default function AddNewCafe() {
 		
 	};
 
-	return <div className="App">
+	return <div className="App2">
 	  <form className="w-full max-w-lg m-auto py-10 mt-10 px-10 border bg-gray-100" onSubmit={handleSubmit(handleAddNew)}>
 		   	  <h2 class="font-medium leading-tight text-5xl mt-0 mb-2 text-black-600">add new cafe</h2>
 <div className="container">

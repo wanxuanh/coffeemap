@@ -78,7 +78,7 @@ export default function Review () {
 
 return <div className="center"> 
 <div>{" "}</div>
-      <a  style={{backgroundColor: "orange" ,color: "black", fontFamily: "Rammetto One", fontSize: "20px"}}href="/review">share your reviews</a>
+      <a  className="center" style={{backgroundColor: "orange" ,color: "black", fontFamily: "Rammetto One", fontSize: "20px"}}href="/review">share your reviews</a>
 
   <input type="text" id="myInput" onChange={filterFunction} placeholder="Search for names.." title="Type in a name"></input>
 
@@ -105,29 +105,14 @@ return <div className="center">
               <TableBody>
 
                 {reviews.map((reviews) => (
-                  <TableRow key={reviews.comments} style={{display: `${reviews.display}`}}>
+                  <TableRow key={reviews.id} style={{display: `${reviews.display}`}}>
                     
-                       <TableCell>
-                     
-                    {reviews.cafes.cafename}
-                       
-                    
-                    </TableCell>{" "}<TableCell>
-
-                        {reviews.comments}
-                    
-                    </TableCell>{" "}
-                    <TableCell>
-                      {/* <Link to={`/price?stock=${item.symbol}`}> */}
-                        {reviews.USP}
-                    </TableCell>{" "}
+                       <TableCell> {reviews.cafes.cafename}</TableCell>{" "}
+                       <TableCell> {reviews.comments} </TableCell>{" "}
+                    <TableCell>{reviews.USP}</TableCell>{" "}
                     <TableCell>{reviews.drinkName}</TableCell>{" "}
-                     <TableCell>
-                        {reviews.drinkPrice}
-                    </TableCell>{" "}
-                       <TableCell>
-                        {reviews.users.name}
-                    </TableCell>{" "}
+                     <TableCell> {reviews.drinkPrice}</TableCell>{" "}
+                       <TableCell>{reviews.users.name} </TableCell>{" "}
                     
                   </TableRow>
                 ))}

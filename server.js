@@ -116,6 +116,11 @@ app.post('/api/login', async (req, res) => {
 	res.status(200).json({token: newToken });
 });
 
+app.post("/api/logout", (req, res) => {
+    res.clearCookie("NewCookie").send("cookie dead")
+	res.status(200)
+})
+
 app.put("/api/update", async (req, res) => {
 		const userId = jwt.decode(req.cookies.jwt_token)
 
@@ -227,9 +232,6 @@ app.delete("/api/delete", async (req, res) => {
 	}
 })
 
-app.post("/logout", (req, res) => {
-    res.clearCookie("NewCookie").send("cookie dead")
-})
 
 /******React router to work on express****/
 app.get('/*', (req, res) => {

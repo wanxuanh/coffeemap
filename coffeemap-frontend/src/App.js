@@ -2,13 +2,13 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Cafe from './components/Cafe';
 import Login from './components/Login';
 import Main from './pages/Main';
-import Map from './components/Map';
+import Map from './pages/Map';
 import Register from './components/Register'
 import NavBar from './components/NavBar';
 import Footer from './components/Footer'
-import AddReview from './components/AddReview';
-import AddNewCafe from './components/AddNewCafe';
-import Profile from './components/Profile'
+import AddReview from './pages/AddReview';
+import AddNewCafe from './pages/AddNewCafe';
+import Profile from './pages/Profile'
 import NavBar2 from './components/Navbar2'
 import {useState} from 'react'
 import { createTheme, ThemeProvider } from "@mui/material/styles";

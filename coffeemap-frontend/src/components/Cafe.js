@@ -75,15 +75,12 @@ export default function Cafe () {
             }       
         }}
 
-return <div className="App" style={{ height: '80vh', width: '100%' }}>
-
-  <section></section>
-      <a  style={{backgroundColor: "orange" ,color: "black", fontFamily: "Rammetto One", fontSize: "20px"}}href="/add">add new cafes</a>
+return  <div className="center"> 
+      <a style={{backgroundColor: "orange" ,color: "black", fontFamily: "Rammetto One", fontSize: "20px"}}href="/add">add new cafes</a>
 <input type="text" id="myInput" onChange={filterFunction} placeholder="Search.." title="Type in a name"></input>
 {loading && <div style={{margin:"auto" , width:"40px"}}><CircularProgress/></div>}
 	 {!loading && 
    <div className="table">
-   
         
         <TableContainer align="center" component={Paper}>
             <Table sx={{ maxWidth: 700 }} aria-label="customized table">

@@ -38,7 +38,15 @@ export default function Login() {
 
 			})
 				.then((res) => res.json())
-				.then((res) => res.token ? navigate("/cafe") : alert('authentication failed'))
+				.then((res) => {
+          if (res.token) {
+            navigate('/cafe')
+            localStorage.setItem("auth", true)
+          }
+        else {
+          alert("authentication failed")
+          localStorage.setItem("auth", false)
+        }})
 				.then(setLoading(false));
 				},1000)
   }

@@ -81,16 +81,16 @@ const navigate = useNavigate();
    
   <label>
 	   <form className="w-full max-w-lg m-auto py-10 mt-10 px-10 border" onSubmit={handleSubmit(onChange)}>
-		   	  <h1 class="font-medium leading-tight text-5xl mt-0 mb-2 text-green-600">Update Particulars</h1>
+		   	  <h1 class="font-medium leading-tight text-5xl mt-0 mb-2 text-blue-600">Update Particulars</h1>
 <div className="container">
             <div className="body d-md-flex align-items-center justify-content-between">
                 <div className="box-1 mt-md-0 mt-5"> </div>
                 <div className=" box-2 d-flex flex-column h-100">
                     <div className="text-gray-600 font-medium">
-    <h6 class="font-medium leading-tight text-base mt-0 mb-2 text-black-600">Username: {userDetails.username}</h6> 
+    <h6 class="font-medium leading-tight text-base mt-0 mb-2 text-green-600">Username: {userDetails.username}</h6> 
 	       {errors.username && <p style={{ color: "red" }}>* required.</p>}<br/>
 
-   <h6 class="font-medium leading-tight text-base mt-0 mb-2 text-black-600"> Name: </h6>
+   <h6 class="font-medium leading-tight text-base mt-0 mb-2 text-green-600"> Name: </h6>
     <input type='name' className='input' name='name' id='name' onChange={(e) => handleChange(e)} value={userDetails.name} />
       {errors.name && <p style={{ color: "red" }}> * required.</p>}
 	 
