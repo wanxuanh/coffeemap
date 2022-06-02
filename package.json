@@ -2,11 +2,15 @@
   "name": "coffeemap-backend",
   "version": "1.0.0",
   "main": "index.js",
+  "engines": {
+    "node": "16.14.0",
+    "npm": "8.4.1"
+  },
   "scripts": {
     "dev": "nodemon server.js",
     "frontend:install": "cd coffeemap-frontend && npm install",
     "frontend:build": "cd coffeemap-frontend && npm run build",
-    "heroku-postbuild": "npm run frontend:build",
+    "heroku-postbuild": "npm run frontend:install && npm run frontend:build",
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js"
   },
