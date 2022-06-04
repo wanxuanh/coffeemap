@@ -35,8 +35,7 @@ Display a list of cafes and pinned location on Google Map
 # Visit
 https://coffeemap-backend.herokuapp.com/
 
-[https://github.com/klaucoffee/googlebooks-frontend
-](https://github.com/wanxuanh/coffeemap)
+https://github.com/wanxuanh/coffeemap
 
 https://www.linkedin.com/in/ho-wan-xuan/
 
