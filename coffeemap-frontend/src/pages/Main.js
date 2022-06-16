@@ -1,8 +1,8 @@
-import Map from '../pages/Map';
+import Map from '../components/Cafe';
 
 export default function Main() {
 	return <>
 
-	<Map />
+	<Cafe />
 	</>
 }
